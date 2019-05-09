@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="project  native code:war">
+    <output-path>$PROJECT_DIR$/project  native code/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>project  native code</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Hospital Warning System.war">
+      <element id="artifact" artifact-name="project  native code:war exploded" />
+    </root>
+  </artifact>
+</component>
