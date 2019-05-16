@@ -1,5 +1,6 @@
 package com.syx.controller;
 
+import com.syx.service.UserService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Scope("prototype")
@@ -16,6 +19,8 @@ import java.util.List;
 
 public class UserController {
 
+    @Resource
+    UserService userService;
     @RequestMapping("/show.do")
     @ResponseBody
     public List showTest() {
@@ -35,15 +40,25 @@ public class UserController {
     @ResponseBody
     public String login(@RequestParam("uname") String uname,String upwd ) {
 
-        if (uname.equals("admin")&&upwd.equals("123456")){
+        List<Map<String,Object>> list=userService.login(uname,upwd);
+        if(list.size()>0)
+            return "success";
+        else
+            return "falis";
+
+
+
+
+
+        /*if (uname.equals("admin")&&upwd.equals("123456")){
 
             return "success";
         }
         System.out.println("loginTest success!");
 
 
-        return "fails";
-        /*    return "../index.jsp";*/
+        return "fails";*/
+
     }
 
 }
