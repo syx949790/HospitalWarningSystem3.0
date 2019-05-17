@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,22 @@ public class UserController {
         return list;
         /*    return "../index.jsp";*/
     }
+    @RequestMapping("/insert.do")
+    @ResponseBody
+    public  String insert(String uname2,String upwd2,String email,String role){
+
+
+      int flag=userService.insert(uname2,upwd2,email,role);
+
+
+        if (flag==1){
+            return "success";
+        }
+        else {
+            return "fails";
+        }
+
+    }
 
     @RequestMapping(value = "/login.do",method = RequestMethod.POST)
     @ResponseBody
@@ -50,7 +67,7 @@ public class UserController {
 
 
 
-        /*if (uname.equals("admin")&&upwd.equals("123456")){
+     /*   if (uname.equals("admin")&&upwd.equals("123456")){
 
             return "success";
         }

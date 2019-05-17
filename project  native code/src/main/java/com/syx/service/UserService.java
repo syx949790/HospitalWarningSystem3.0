@@ -15,7 +15,15 @@ public class UserService implements IUserService {
     @Override
     public List<Map<String, Object>> login(String uname, String upwd) {
        List<Map<String,Object>> list = userDao.login(uname,upwd);
-        //System.out.println(uname+","+upwd);
+
         return list;
+    }
+
+    @Override
+    public int insert(String uname2,String upwd2,String email,String role) {
+
+        int flag=userDao.insert(uname2,upwd2,email,role);
+
+        return flag;
     }
 }

@@ -53,6 +53,23 @@
                 layer.tips("邮箱格式不正确!","#email",{tips:[2,'#FF0000'],time:3000});
                 return;
             }
+            $.ajax({
+                url:"user/insert.do",
+                method:"post",
+                cache:false,
+                data:$("#insertForm").serialize(),//表单序列化
+                success:function (result) {
+                    if(JSON.parse(result)=="success")
+                        window.location.href="admin.html";
+                    else
+                    {
+                        layer.msg("注册失败！",{icon:2});
+                    }
+                },
+                error:function(e){
+                    layer.msg("请求服务器失败！",{icon:2});
+                }
+            });
         }
         function login() {
             var uname=$("#uname").val();
@@ -150,7 +167,7 @@
                 </div>
 
                 <div class="layui-tab-item">
-                    <form id="loginForm">
+                    <form id="insertForm">
                         <div class="layui-form-item">
                             <label class="layui-form-label">用户名</label>
                             <div class="layui-input-block">
@@ -175,6 +192,20 @@
                                 <input type="text" id="email" name="email" lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
                             </div>
                         </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">权限选择</label>
+                            <div class="layui-input-block">
+                                <select name="role" id="role" lay-filter="aihao">
+
+                                    <option value="admin">管理员</option>
+                                    <option value="doctor" selected="selected">医生</option>
+                                    <option value="nurse">护士</option>
+                                    <option value="inspector">检测员</option>
+
+                                </select>
+                            </div>
+                        </div>
+
 
                         <div class="layui-form-item" align="center">
                             <a class="layui-btn" href="javascript:zhuce()">注册</a>
