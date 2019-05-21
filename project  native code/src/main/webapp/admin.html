@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天津医科大学总医院医疗设备检修预警系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/vcode.css">
+</head>
+<body>
+<h4>人员列表</h4>
+<table class="layui-hide" id="userTable"></table>
+<script type="text/javascript" src="jquery/jquery3.4.1.js"></script>
+<script type="text/javascript" src="layui/layui.all.js"></script>
+<script type="text/javascript" src="js/vcode.js"></script>
+<script type="text/javascript">
+    //编写layui的ajax json 异步
+    layui.use('table',function () {
+        //创建一个layui table 对象
+        var table=layui.table;
+        table.render({
+
+            elem:'#userTable',//绑定table id值
+            url:'user/userlist.do' ,
+            cellWinWidth:50,//单元格最小宽度
+            idField:'id',//必须填id
+            method:'post',
+            cols:[[
+                {type:'checkbox',sort:true},
+                {field:'id',width:'40',title:'ID',sort:true},
+                {field:'uname',width:'100',title:'用户名',sort:true},
+                {field:'role',width:'100',title:'职位',sort:true},
+                {field:'registerTime',width:'160',title:'注册时间',sort:true},
+                {field:'lastLoginTime',width:'160',title:'最后登录时间',sort:true},
+            ]],
+            page:true
+
+        });
+
+    });
+</script>
+</body>
+</html>

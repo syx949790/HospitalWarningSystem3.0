@@ -6,6 +6,16 @@
     <select id="findUserByUnameAndUpwd" parameterType="map"  resultType="map">
         select * from tb_user where uname=#{uname} and upwd=md5(#{upwd})
     </select>
+    <select id="findUserAll"   resultType="map">
+       select  * from  tb_user
+    </select>
+    <select id="findCountUser"   resultType="int">
+        select count(*) from tb_user   /*count (*)   如果 两者分开 则报错  */
+    </select>
+
+
+
+
   <!--  tb_user要与数据库表中列属性顺序一致
   <insert id="insertUser" parameterType="map" >
         insert into tb_user(uname,upwd,role,email) values (#{uname},#{upwd},#{role},#{eamil})

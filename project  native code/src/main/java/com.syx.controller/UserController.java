@@ -63,19 +63,42 @@ public class UserController {
         else
             return "falis";
 
+    }
 
+    /*
+    * 返回用户列表方法，因为layui需要的json数据格式，所以参照json格式返回对应的集合对象
+    *
+    * */
 
+    @RequestMapping(value = "/userlist.do")
+    @ResponseBody
+    public Map<String,Object> UserList( ) {
 
+        //先获取userlist列表对象
+        List<Map<String,Object>> list=userService.UserList();
+        System.out.println(list.size());
+        if(list.size()>0){
 
-     /*   if (uname.equals("admin")&&upwd.equals("123456")){
+            int count=userService.UserCount();
 
-            return "success";
+            Map<String,Object> map=new HashMap<>();
+            map.put("msg","");
+            map.put("code",0);
+            map.put("data",list);
+            map.put("count",count);
+            return map;
         }
-        System.out.println("loginTest success!");
 
 
-        return "fails";*/
+        else{
+
+            return null;
+        }
+
 
     }
+
+
+
 
 }
