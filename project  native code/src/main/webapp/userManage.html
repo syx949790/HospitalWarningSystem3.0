@@ -22,6 +22,7 @@
                     url:'user/findAllUser.do' ,
                     cellWinWidth:50,//单元格最小宽度
                     idField:'id',//必须填id
+
                     method:'post',
                     cols:[[
                         {type:'checkbox',sort:true},
@@ -30,6 +31,11 @@
                         {field:'role',width:'100',title:'职位',sort:true},
                         {field:'registerTime',width:'160',title:'注册时间',sort:true},
                         {field:'lastLoginTime',width:'160',title:'最后登录时间',sort:true},
+                        {field:'id',width:'160',title:'操作',templet:function (row) {
+                            var del="<a href='' title='删除'><span style='' class='layui-icon layui-icon-delete'></span>";
+                                var update="<a href='' title='更新'><span style='' class='layui-icon layui-icon-table'></span>";
+                                return del+"<span>|</span>"+update;
+                            },sort:true},
                     ]],
                     page:true
 

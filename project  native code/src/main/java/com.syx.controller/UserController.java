@@ -79,12 +79,12 @@ public class UserController {
 
 
         List<Map<String,Object>> list=userService.findAllUser(map);
-
+        int count=userService.UserCount();
         map.clear();
         map.put("msg","");
         map.put("code",0);
         map.put("data",list);
-        map.put("count",list.size());
+        map.put("count",count);
 
 
         return map;

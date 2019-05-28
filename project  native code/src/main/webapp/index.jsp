@@ -102,7 +102,7 @@
                         if(JSON.parse(result)=="success"){
 
 
-                            window.location.href="admin.html";
+                            window.location.href="admin2.html";
 
                         }
 
