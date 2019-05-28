@@ -22,7 +22,7 @@
                     url:'user/findAllUser.do' ,
                     cellWinWidth:50,//单元格最小宽度
                     idField:'id',//必须填id
-
+                    toolbar:'#tbl_tools',
                     method:'post',
                     cols:[[
                         {type:'checkbox',sort:true},
@@ -52,5 +52,15 @@
 <table id="userTable" class="layui-table">
 
 </table>
+<script id="tbl_tools" type="text/html">
+    <div class="layui-inline" style="left: 0px">
+<input id="tool_uname" class="layui-input-block " placeholder="请输入用户名">
+<a href="" class="layui-btn layui-btn-danger"><span class="layui-icon layui-icon-search"></span>搜索</a>
+</div>
+<a href="" style="right: 0px"> <span class="layui-icon layui-icon-add-circle"></span>添加用户</a>
+
+
+</script>
+
 </body>
 </html>
