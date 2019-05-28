@@ -16,6 +16,20 @@
 
 
 
+    <!--张建军老师-->
+<select id="findAllUser" parameterType="map" resultType="map">
+    select * from tb_user
+    <where>
+        <if test="uname!=null">
+            and uname like concat("%",concat(#{uname},"%"))
+        </if>
+
+    </where>
+    limit #{recordIndex},#{pagesize}
+</select>
+
+
+
   <!--  tb_user要与数据库表中列属性顺序一致
   <insert id="insertUser" parameterType="map" >
         insert into tb_user(uname,upwd,role,email) values (#{uname},#{upwd},#{role},#{eamil})

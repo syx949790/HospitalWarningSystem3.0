@@ -8,5 +8,7 @@ public interface IUserService {
     List<Map<String,Object>> UserList();
     int UserCount();
 
+    List<Map<String,Object>> findAllUser(Map map);
+
     int insert(String uname2,String upwd2,String email,String role);
 }

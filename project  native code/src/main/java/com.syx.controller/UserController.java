@@ -65,6 +65,39 @@ public class UserController {
 
     }
 
+
+
+    @RequestMapping(value = "/findAllUser.do")
+    @ResponseBody
+    public Map<String,Object> findAllUser( String uname,int page,int limit ) {
+
+        Map map=new HashMap();
+        map.put("uname",uname);
+        map.put("recordIndex",(page-1)*limit);
+        map.put("pagesize",limit);
+
+
+
+        List<Map<String,Object>> list=userService.findAllUser(map);
+
+        map.clear();
+        map.put("msg","");
+        map.put("code",0);
+        map.put("data",list);
+        map.put("count",list.size());
+
+
+        return map;
+
+
+    }
+
+
+
+
+
+
+
     /*
     * 返回用户列表方法，因为layui需要的json数据格式，所以参照json格式返回对应的集合对象
     *

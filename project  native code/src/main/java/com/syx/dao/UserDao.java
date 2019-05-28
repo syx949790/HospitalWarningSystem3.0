@@ -71,5 +71,14 @@ public class UserDao implements IUserDao {
         return count;
     }
 
+    @Override
+    public List<Map<String, Object>> findAllUser(Map map) {
+        SqlSession sqlSession=sqlSessionFactory.openSession(true);
+        String sql="com.syx.mapper.userMapper.findAllUser";
+        List<Map<String ,Object>> list=sqlSession.selectList(sql,map);
+
+        return list;
+    }
+
 
 }
