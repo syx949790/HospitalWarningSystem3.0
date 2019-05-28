@@ -38,9 +38,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public int insert(String uname2,String upwd2,String email,String role) {
+    public int insert(String uname2,String upwd2) {
 
-        int flag=userDao.insert(uname2,upwd2,email,role);
+        int flag=userDao.insert(uname2,upwd2);
 
         return flag;
     }

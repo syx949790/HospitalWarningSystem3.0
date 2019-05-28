@@ -38,10 +38,10 @@ public class UserController {
     }
     @RequestMapping("/insert.do")
     @ResponseBody
-    public  String insert(String uname2,String upwd2,String email,String role){
+    public  String insert(String uname2,String upwd2){
 
 
-      int flag=userService.insert(uname2,upwd2,email,role);
+      int flag=userService.insert(uname2,upwd2);
 
 
         if (flag==1){

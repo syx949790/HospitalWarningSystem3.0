@@ -20,20 +20,20 @@ public class UserDao implements IUserDao {
 
 
     @Override
-    public int insert(String uname2,String upwd2,String email,String role) {
+    public int insert(String uname2,String upwd2) {
 
         SqlSession sqlSession=sqlSessionFactory.openSession(true);
         String sql="com.syx.mapper.userMapper.insertUserByOne";
         Map map=new HashMap();
         map.put("uname",uname2);
         map.put("upwd",upwd2);
-        map.put("email",email);
-        map.put("role",role);
 
 
 
+
+        System.out.println("fail");
         int flag=sqlSession.insert(sql,map);
-
+System.out.println("success");
         return flag;
     }
 

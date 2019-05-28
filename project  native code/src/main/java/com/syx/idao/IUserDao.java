@@ -12,5 +12,5 @@ public interface IUserDao {
 
 
 
-    int insert(String uname2,String upwd2,String email,String role);
+    int insert(String uname2,String upwd2);
 }

@@ -35,6 +35,6 @@
         insert into tb_user(uname,upwd,role,email) values (#{uname},#{upwd},#{role},#{eamil})
     </insert>-->
     <insert id="insertUserByOne" parameterType="map">
-        insert into  tb_user(uname,upwd,email,role) values (#{uname},md5(#{upwd}),#{email},#{role})
+        insert into  tb_user(uname,upwd,role,registerTime,lastLoginTime) values (#{uname},md5(#{upwd}),'职员',now(),now())
     </insert>
 </mapper>

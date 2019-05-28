@@ -61,7 +61,7 @@
                 success:function (result) {
                     if(JSON.parse(result)=="success")
 
-                        window.location.href="admin.html";
+                        window.location.href="admin2.html";
                     else
                     {
                         layer.msg("注册失败！",{icon:2});
@@ -199,19 +199,7 @@
                                 <input type="text" id="email" name="email" lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
                             </div>
                         </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">权限选择</label>
-                            <div class="layui-input-block">
-                                <select name="role" id="role" lay-filter="aihao">
 
-                                    <option value="admin">管理员</option>
-                                    <option value="doctor" selected="selected">医生</option>
-                                    <option value="nurse">护士</option>
-                                    <option value="inspector">检测员</option>
-
-                                </select>
-                            </div>
-                        </div>
 
 
                         <div class="layui-form-item" align="center">
