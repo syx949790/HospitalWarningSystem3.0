@@ -33,6 +33,12 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public int deleteUserById(int id) {
+        int flag = userDao.deleteUserById(id);
+        return flag;
+    }
+
+    @Override
     public List<Map<String, Object>> findAllUser(Map map) {
         List<Map<String, Object>> list = userDao.findAllUser(map);
         return list;

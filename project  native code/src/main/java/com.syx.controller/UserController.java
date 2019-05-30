@@ -54,6 +54,22 @@ public class UserController {
 
     }
 
+    @RequestMapping("/deleteById.do")
+    @ResponseBody
+    public String deleteUserById(int id) {
+
+
+        int flag = userService.deleteUserById(id);
+
+
+        if (flag == 1) {
+            return "success";
+        } else {
+            return "fails";
+        }
+
+    }
+
     @RequestMapping("/insertUser.do")
     @ResponseBody
     public String insertUser(String uname, String upwd, String role) {

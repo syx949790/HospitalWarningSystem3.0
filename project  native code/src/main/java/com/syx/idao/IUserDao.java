@@ -16,4 +16,6 @@ public interface IUserDao {
     int register(String uname2, String upwd2);
 
     int insertUser(Map map);
+
+    int deleteUserById(int id);
 }

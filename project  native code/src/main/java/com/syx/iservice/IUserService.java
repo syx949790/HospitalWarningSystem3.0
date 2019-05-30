@@ -9,6 +9,7 @@ public interface IUserService {
     List<Map<String, Object>> UserList();
 
     int UserCount();
+    int deleteUserById(int id);
 
     List<Map<String, Object>> findAllUser(Map map);
 

@@ -48,6 +48,14 @@ public class UserDao implements IUserDao {
     }
 
     @Override
+    public int deleteUserById(int id) {
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        String sql = "com.syx.mapper.userMapper.deleteById";
+        int flag = sqlSession.delete(sql,id);
+        return flag;
+    }
+
+    @Override
     public List<Map<String, Object>> login(String uname, String upwd) {
 
 

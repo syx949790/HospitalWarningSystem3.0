@@ -44,7 +44,7 @@
         });
 
         /*删除函数*/
-        function DeleteUser(uid) {
+        function DeleteUser( id) {
             alert(uid + "id");
             //提示是否删除
             layer.confirm("是否删除该用户?", {icon: 3, title: "警告"}, function () {
@@ -52,7 +52,7 @@
                 layer.closeAll();
                 //异步删除db数据
                 $.ajax({
-                    url: '',
+                    url: 'user/deleteById.do',
                     data: {"id": uid},
                     method: 'post',
                     success: function (data) {
