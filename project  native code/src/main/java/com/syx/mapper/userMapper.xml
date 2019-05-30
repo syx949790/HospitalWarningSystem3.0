@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.syx.mapper.userMapper" >
+<mapper namespace="com.syx.mapper.userMapper">
 
-    <!--数据库表tb_user需要含有 uname，upwd，role，email等属性-->
-    <select id="findUserByUnameAndUpwd" parameterType="map"  resultType="map">
+    <!--数据库表tb_user需要含有 uname，upwd，role等属性-->
+    <select id="findUserByUnameAndUpwd" parameterType="map" resultType="map">
         select * from tb_user where uname=#{uname} and upwd=md5(#{upwd})
     </select>
-    <select id="findUserAll"   resultType="map">
+    <select id="findUserAll" resultType="map">
        select  * from  tb_user
     </select>
-    <select id="findCountUser"   resultType="int">
+    <select id="findCountUser" resultType="int">
         select count(*) from tb_user   /*count (*)   如果 两者分开 则报错  */
     </select>
 
 
-
-
     <!--张建军老师-->
-<select id="findAllUser" parameterType="map" resultType="map">
-    select * from tb_user
-    <where>
-        <if test="uname!=null">
-            and uname like concat("%",concat(#{uname},"%"))
-        </if>
+    <select id="findAllUser" parameterType="map" resultType="map">
+        select * from tb_user
+        <where>
+            <if test="uname!=null">
+                and uname like concat("%",concat(#{uname},"%"))
+            </if>
 
-    </where>
-    limit #{recordIndex},#{pagesize}
-</select>
+        </where>
+        limit #{recordIndex},#{pagesize}
+    </select>
 
 
-
-  <!--  tb_user要与数据库表中列属性顺序一致
-  <insert id="insertUser" parameterType="map" >
-        insert into tb_user(uname,upwd,role,email) values (#{uname},#{upwd},#{role},#{eamil})
-    </insert>-->
-    <insert id="insertUserByOne" parameterType="map">
+    <!--  tb_user要与数据库表中列属性顺序一致
+    <insert id="insertUser" parameterType="map" >
+          insert into tb_user(uname,upwd,role,email) values (#{uname},#{upwd},#{role},#{eamil})
+      </insert>-->
+    <insert id="register" parameterType="map">
         insert into  tb_user(uname,upwd,role,registerTime,lastLoginTime) values (#{uname},md5(#{upwd}),'职员',now(),now())
+    </insert>
+
+
+    <insert id="insertUser" parameterMap="map">
+          insert into  tb_user(uname,upwd,role,registerTime,lastLoginTime) values (#{uname},md5(#{upwd}),#{role},now(),now())
     </insert>
 </mapper>

@@ -5,39 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>医疗设备检修预警系统</title>
     <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <script type="text/javascript" src="jquery/jquery3.4.1.js"></script>
     <script type="text/javascript" src="layui/layui.all.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(function () {
             loadAllUserInfo();
+            /*添加用户button点击事件*/
+            $("#inserButton").click(function () {
+                alert($("#uname").val());
+                $.ajax({
+                    url: 'user/insertUser.do',
+                    method: 'post',
+                    data: {
+                        "uname": $("#uname").val(),
+                        "upwd": $("#upwd").val(),
+                        "role": $("#role").val(),
+                    },
+                    success: function (data) {
+                        if (JSON.parse(data) == "success") {
+                            layer.msg("添加users成功");
+                            // 刷新table
+                            layer.table.reload("userTable");
+                            /*关闭模态框*/
+                            $("#mainModel").modal('hide');
+
+                        } else {
+                            alert("insert 失败");
+                        }
+                    },
+                    error: function () {
+                        alert("连接服务器失败");
+                    }
+                })
+            });
+
         });
+
+        /*删除函数*/
+        function DeleteUser(uid) {
+            alert(uid + "id");
+            //提示是否删除
+            layer.confirm("是否删除该用户?", {icon: 3, title: "警告"}, function () {
+                // 数据在table中layui删除，不等于数据库删除
+                layer.closeAll();
+                //异步删除db数据
+                $.ajax({
+                    url: '',
+                    data: {"id": uid},
+                    method: 'post',
+                    success: function (data) {
+                        if (JSON.parse(data) == "success") {
+                            layer.msg("删除users成功");
+                            // 刷新table
+                            layer.table.reload("userTable");
+                            /!*关闭模态框*!/
+                            $("#mainModel").modal('hide');
+
+                        } else {
+                            alert("delete 失败");
+                        }
+                    },
+                    error: function () {
+                        alert("err");
+                    }
+                });
+            });
+        }
+
         function loadAllUserInfo() {
             //编写layui的ajax json 异步
-            layui.use('table',function () {
+            layui.use('table', function () {
                 //创建一个layui table 对象
-                var table=layui.table;
+                var table = layui.table;
                 table.render({
 
-                    elem:'#userTable',//绑定table id值
-                    url:'user/findAllUser.do' ,
-                    cellWinWidth:50,//单元格最小宽度
-                    idField:'id',//必须填id
-                    toolbar:'#tbl_tools',
-                    method:'post',
-                    cols:[[
-                        {type:'checkbox',sort:true},
-                        {field:'id',width:'40',title:'ID',sort:true},
-                        {field:'uname',width:'100',title:'用户名',sort:true},
-                        {field:'role',width:'100',title:'职位',sort:true},
-                        {field:'registerTime',width:'160',title:'注册时间',sort:true},
-                        {field:'lastLoginTime',width:'160',title:'最后登录时间',sort:true},
-                        {field:'id',width:'160',title:'操作',templet:function (row) {
-                            var del="<a href='' title='删除'><span style='' class='layui-icon layui-icon-delete'></span>";
-                                var update="<a href='' title='更新'><span style='' class='layui-icon layui-icon-table'></span>";
-                                return del+"<span>|</span>"+update;
-                            },sort:true},
+                    elem: '#userTable',//绑定table id值
+                    url: 'user/findAllUser.do',
+                    cellWinWidth: 50,//单元格最小宽度
+                    idField: 'id',//必须填id
+                    toolbar: '#tbl_tools',
+                    method: 'post',
+                    cols: [[
+                        {type: 'checkbox', sort: true},
+                        {field: 'id', width: '40', title: 'ID', sort: true},
+                        {field: 'uname', width: '100', title: '用户名', sort: true},
+                        {field: 'role', width: '100', title: '职位', sort: true},
+                        {field: 'registerTime', width: '160', title: '注册时间', sort: true},
+                        {field: 'lastLoginTime', width: '160', title: '最后登录时间', sort: true},
+                        {
+                            field: 'id', width: '160', title: '操作', templet: function (row) {
+                                var del = "<a href='JavaScript:DeleteUser('" + row.id + "')' title='删除'><span style='' class='layui-icon layui-icon-delete'></span>";
+                                var update = "<a href='' title='更新'><span style='' class='layui-icon layui-icon-table'></span>";
+                                return del + "<span>|</span>" + update;
+                            }, sort: true
+                        },
                     ]],
-                    page:true
+                    page: true
 
                 });
 
@@ -53,14 +118,66 @@
 
 </table>
 <script id="tbl_tools" type="text/html">
-    <div class="layui-inline" style="left: 0px">
-<input id="tool_uname" class="layui-input-block " placeholder="请输入用户名">
-<a href="" class="layui-btn layui-btn-danger"><span class="layui-icon layui-icon-search"></span>搜索</a>
-</div>
-<a href="" style="right: 0px"> <span class="layui-icon layui-icon-add-circle"></span>添加用户</a>
+    <button class="layui-btn layui-btn-danger" data-toggle="modal" data-target="#mainModel">
+        <i class="layui-icon">&#xe640</i>
+    </button>
 
 
+    <!--  <div class="layui-inline" style="left: 0px">
+  <input id="tool_uname" class="layui-input-block " placeholder="请输入用户名">
+  <a href="" class="layui-btn layui-btn-danger"><span class="layui-icon layui-icon-search"></span>搜索</a>
+  </div>
+  <a href="" style="right: 0px"> <span class="layui-icon layui-icon-add-circle"></span>添加用户</a>-->
 </script>
+
+
+<!--div隐藏的效果，data-target="#mainModel"会触发隐藏的div显示为模态框的效果，指的是整个区域，处于暗黑色的样式-->
+<div class="modal fade" id="mainModel" tabindex="-1" role="dialog" aria-hidden="true">
+    <!--模态对话框  悬浮框-->
+    <div class="modal-dialog">
+        <!-- 模态框主题内容-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">用户添加</h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" class="form-horizontal" id="formUsers">
+                    <!--用户名-->
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">员工姓名:</label>
+                        <div class="col-md-6 col-xs-11">
+                            <input class="form-control" name="name" id="uname" size="16" type="text" value="">
+                        </div>
+                    </div>
+                    <!--用户密码-->
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">员工密码:</label>
+                        <div class="col-md-6 col-xs-11">
+                            <input class="form-control" name="upwd" id="upwd" size="16" type="password" value="">
+                        </div>
+                    </div>
+                    <!--role-->
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">员工姓名:</label>
+                        <div class="col-md-6 col-xs-11">
+                            <select class="form-control input-sm m-bot15" name="role" id="role">
+                                <option value="admin">管理员</option>
+                                <option value="employee">职员</option>
+                                <option value="checker">检修员</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--按钮-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="inserButton">Submit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

@@ -22,6 +22,7 @@ public class UserController {
 
     @Resource
     UserService userService;
+
     @RequestMapping("/show.do")
     @ResponseBody
     public List showTest() {
@@ -36,29 +37,50 @@ public class UserController {
         return list;
         /*    return "../index.jsp";*/
     }
-    @RequestMapping("/insert.do")
+
+    @RequestMapping("/register.do")
     @ResponseBody
-    public  String insert(String uname2,String upwd2){
+    public String register(String uname2, String upwd2) {
 
 
-      int flag=userService.insert(uname2,upwd2);
+        int flag = userService.register(uname2, upwd2);
 
 
-        if (flag==1){
+        if (flag == 1) {
             return "success";
-        }
-        else {
+        } else {
             return "fails";
         }
 
     }
 
-    @RequestMapping(value = "/login.do",method = RequestMethod.POST)
+    @RequestMapping("/insertUser.do")
     @ResponseBody
-    public String login(@RequestParam("uname") String uname,String upwd ) {
+    public String insertUser(String uname, String upwd, String role) {
 
-        List<Map<String,Object>> list=userService.login(uname,upwd);
-        if(list.size()>0)
+        Map map = new HashMap();
+        map.put("uname", uname);
+        map.put("upwd", upwd);
+        map.put("role", role);
+
+        int flag = userService.insertUser(map);
+
+
+        if (flag == 1) {
+            return "success";
+        } else {
+            return "fails";
+        }
+
+    }
+
+
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String login(@RequestParam("uname") String uname, String upwd) {
+
+        List<Map<String, Object>> list = userService.login(uname, upwd);
+        if (list.size() > 0)
             return "success";
         else
             return "falis";
@@ -66,25 +88,23 @@ public class UserController {
     }
 
 
-
     @RequestMapping(value = "/findAllUser.do")
     @ResponseBody
-    public Map<String,Object> findAllUser( String uname,int page,int limit ) {
+    public Map<String, Object> findAllUser(String uname, int page, int limit) {
 
-        Map map=new HashMap();
-        map.put("uname",uname);
-        map.put("recordIndex",(page-1)*limit);
-        map.put("pagesize",limit);
+        Map map = new HashMap();
+        map.put("uname", uname);
+        map.put("recordIndex", (page - 1) * limit);
+        map.put("pagesize", limit);
 
 
-
-        List<Map<String,Object>> list=userService.findAllUser(map);
-        int count=userService.UserCount();
+        List<Map<String, Object>> list = userService.findAllUser(map);
+        int count = userService.UserCount();
         map.clear();
-        map.put("msg","");
-        map.put("code",0);
-        map.put("data",list);
-        map.put("count",count);
+        map.put("msg", "");
+        map.put("code", 0);
+        map.put("data", list);
+        map.put("count", count);
 
 
         return map;
@@ -99,39 +119,34 @@ public class UserController {
 
 
     /*
-    * 返回用户列表方法，因为layui需要的json数据格式，所以参照json格式返回对应的集合对象
-    *
-    * */
+     * 返回用户列表方法，因为layui需要的json数据格式，所以参照json格式返回对应的集合对象
+     *
+     * */
 
     @RequestMapping(value = "/userlist.do")
     @ResponseBody
-    public Map<String,Object> UserList( ) {
+    public Map<String, Object> UserList() {
 
         //先获取userlist列表对象
-        List<Map<String,Object>> list=userService.UserList();
+        List<Map<String, Object>> list = userService.UserList();
         System.out.println(list.size());
-        if(list.size()>0){
+        if (list.size() > 0) {
 
-            int count=userService.UserCount();
+            int count = userService.UserCount();
 
-            Map<String,Object> map=new HashMap<>();
-            map.put("msg","");
-            map.put("code",0);
-            map.put("data",list);
-            map.put("count",count);
+            Map<String, Object> map = new HashMap<>();
+            map.put("msg", "");
+            map.put("code", 0);
+            map.put("data", list);
+            map.put("count", count);
             return map;
-        }
-
-
-        else{
+        } else {
 
             return null;
         }
 
 
     }
-
-
 
 
 }
