@@ -17,5 +17,5 @@ public interface IUserDao {
 
     int insertUser(Map map);
 
-    int deleteUserById(int id);
+    int deleteUserById(String id);
 }

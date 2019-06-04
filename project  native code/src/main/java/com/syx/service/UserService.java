@@ -33,7 +33,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public int deleteUserById(int id) {
+    public int deleteUserById(String id) {
         int flag = userDao.deleteUserById(id);
         return flag;
     }

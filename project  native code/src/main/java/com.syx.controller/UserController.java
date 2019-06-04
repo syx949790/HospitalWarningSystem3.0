@@ -56,10 +56,13 @@ public class UserController {
 
     @RequestMapping("/deleteById.do")
     @ResponseBody
-    public String deleteUserById(int id) {
+    public String deleteUserById(String id) {
+          String [] arr = id.split(",");
+          int flag=0;
+for (String str:arr){
+     flag = userService.deleteUserById(str);
+}
 
-
-        int flag = userService.deleteUserById(id);
 
 
         if (flag == 1) {
@@ -107,6 +110,7 @@ public class UserController {
     @RequestMapping(value = "/findAllUser.do")
     @ResponseBody
     public Map<String, Object> findAllUser(String uname, int page, int limit) {
+
 
         Map map = new HashMap();
         map.put("uname", uname);

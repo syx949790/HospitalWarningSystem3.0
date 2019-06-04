@@ -12,6 +12,7 @@
     <script type="text/javascript">
         $(function () {
             loadAllUserInfo();
+
             /*添加用户button点击事件*/
             $("#inserButton").click(function () {
                 alert($("#uname").val());
@@ -43,9 +44,49 @@
 
         });
 
+        function refreshTable() {
+            layui.table.reload("id");
+
+
+        }
+        function deleteBenchById() {
+             table=layui.table.checkStatus("id");
+            var str="";
+            $.each(table.data,function (index,arr) {
+                str += arr.id + ",";
+            });
+            //提示是否删除
+            layer.confirm("是否删除该用户?", {icon: 3, title: "警告"}, function () {
+                // 数据在table中layui删除，不等于数据库删除
+                layer.closeAll();
+                //异步删除db数据
+                $.ajax({
+                    url: 'user/deleteById.do',
+                    data: {"id": str},
+                    method: 'post',
+                    success: function (data) {
+                        if (JSON.parse(data) == "success") {
+                            layer.msg("删除users成功");
+                            // 刷新table
+                            layer.table.reload("id");
+                            /!*关闭模态框*!/
+                            $("#mainModel").modal('hide');
+
+                        } else {
+                            alert("删除 失败");
+                        }
+                    },
+                    error: function () {
+                        alert("err");
+                    }
+                });
+            });
+
+        }
+
         /*删除函数*/
-        function DeleteUser( id) {
-            alert(uid + "id");
+        function DeleteUser( uid) {
+
             //提示是否删除
             layer.confirm("是否删除该用户?", {icon: 3, title: "警告"}, function () {
                 // 数据在table中layui删除，不等于数据库删除
@@ -59,12 +100,12 @@
                         if (JSON.parse(data) == "success") {
                             layer.msg("删除users成功");
                             // 刷新table
-                            layer.table.reload("userTable");
+                            layer.table.reload("id");
                             /!*关闭模态框*!/
                             $("#mainModel").modal('hide');
 
                         } else {
-                            alert("delete 失败");
+                            alert("删除 失败");
                         }
                     },
                     error: function () {
@@ -74,6 +115,15 @@
             });
         }
 
+        function addUserInfo() {
+            layer.open({
+                type: 2,
+                title:"添加用户信息",
+                closeBtn:1,//不显示关闭按钮
+                area:['340px','250px'],
+                content:"admin.html",
+            })
+        }
         function loadAllUserInfo() {
             //编写layui的ajax json 异步
             layui.use('table', function () {
@@ -83,8 +133,9 @@
 
                     elem: '#userTable',//绑定table id值
                     url: 'user/findAllUser.do',
+                    where:{"uname":$("#tool_uname").val()},
                     cellWinWidth: 50,//单元格最小宽度
-                    idField: 'id',//必须填id
+                    id: 'id',//必须填id
                     toolbar: '#tbl_tools',
                     method: 'post',
                     cols: [[
@@ -96,8 +147,8 @@
                         {field: 'lastLoginTime', width: '160', title: '最后登录时间', sort: true},
                         {
                             field: 'id', width: '160', title: '操作', templet: function (row) {
-                                var del = "<a href='JavaScript:DeleteUser('" + row.id + "')' title='删除'><span style='' class='layui-icon layui-icon-delete'></span>";
-                                var update = "<a href='' title='更新'><span style='' class='layui-icon layui-icon-table'></span>";
+                                var del = '<a href="javascript:DeleteUser('+row.id+')" title="删除"><span  class="layui-icon layui-icon-delete"></span></a>';
+                                var update = "<a href='' title='更新'><span style='' class='layui-icon layui-icon-table'></span></a>";
                                 return del + "<span>|</span>" + update;
                             }, sort: true
                         },
@@ -123,11 +174,13 @@
     </button>
 
 
-    <!--  <div class="layui-inline" style="left: 0px">
+     <div class="layui-inline" style="left: 0px">
   <input id="tool_uname" class="layui-input-block " placeholder="请输入用户名">
-  <a href="" class="layui-btn layui-btn-danger"><span class="layui-icon layui-icon-search"></span>搜索</a>
+  <a href="javascript:loadAllUserInfo()" class="layui-btn layui-btn-danger"><span class="layui-icon layui-icon-search"></span>搜索</a>
+         <a href="javascript:refreshTable()" class="layui-btn layui-btn-danger"><span class="layui-icon layui-icon-refresh"></span>刷新</a>
+         <a href="javascript:deleteBenchById()" class="layui-btn layui-btn-danger"><span class="layui-icon layui-icon-delete "></span>删除用户</a>
   </div>
-  <a href="" style="right: 0px"> <span class="layui-icon layui-icon-add-circle"></span>添加用户</a>-->
+  <a href="javascript:addUserInfo()" style="right: 0px" class="layui-btn layui-btn-danger"> <span class="layui-icon layui-icon-add-circle"></span>添加用户</a>
 </script>
 
 

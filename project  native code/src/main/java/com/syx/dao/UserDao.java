@@ -48,7 +48,7 @@ public class UserDao implements IUserDao {
     }
 
     @Override
-    public int deleteUserById(int id) {
+    public int deleteUserById(String id) {
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
         String sql = "com.syx.mapper.userMapper.deleteById";
         int flag = sqlSession.delete(sql,id);
