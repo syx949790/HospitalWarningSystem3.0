@@ -56,6 +56,17 @@ public class UserDao implements IUserDao {
     }
 
     @Override
+    public List<Map<String, Object>> userGenderAnalysis() {
+
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        String sql = "com.syx.mapper.userMapper.userGenderAnalysis";
+        List<Map<String, Object>> list = sqlSession.selectList(sql);
+
+        return list;
+
+    }
+
+    @Override
     public List<Map<String, Object>> login(String uname, String upwd) {
 
 

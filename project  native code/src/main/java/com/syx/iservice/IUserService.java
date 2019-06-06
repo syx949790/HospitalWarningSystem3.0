@@ -16,4 +16,6 @@ public interface IUserService {
     int register(String uname2, String upwd2);
 
     int insertUser(Map map);
+
+    List<Map<String, Object>> userGenderAnalysis();
 }

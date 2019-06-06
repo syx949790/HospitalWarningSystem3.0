@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="layui/layui.all.js"></script>
+    <script type="text/javascript" src="jquery/jquery3.4.1.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            bar();
+            gauge();
+        })
+        function  gauge(){
+
+            $.ajax({
+                url: 'user/manPercent.do',
+                method: 'get',
+                success:function (result) {
+                    var myChart = echarts.init(document.getElementById('gauge'));
+                    var option = {
+                        tooltip : {
+                            formatter: "{a} <br/>{b} : {c}%"
+                        },
+                        toolbox: {
+                            feature: {
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        series: [
+                            {
+
+                                type: 'gauge',
+                                detail: {formatter:'{value}%'},
+                                data: [{value: 50, name: '男生比率'}]
+                            }
+                        ]
+                    };
+
+                    setInterval(function () {
+                        option.series[0].data[0].value = (result*100).toFixed(2);
+                        myChart.setOption(option, true);
+                    },2000);
+
+                },
+                error:function () {
+                    alert("访问服务器失败");
+                }
+            })
+
+        }
+
+        function bar() {
+
+            $.ajax({
+                url: 'user/userGenderAnalysis.do',
+                method: 'get',
+                success: function (result) {
+
+                    var obj = JSON.parse(result);
+                    var myChart = echarts.init(document.getElementById('bar'));
+                    var option = {
+                        title: {
+                            text: '用户性别统计'
+                        },
+                        tooltip: {},
+                        legend: {
+                            data: ['人数']
+                        },
+                        xAxis: {
+                            data: obj.gender
+                        },
+                        yAxis: {},
+                        series: [{
+                            name: '人数',
+                            type: 'bar',
+                            data: obj.count
+                        }]
+                    };
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+
+
+                },
+                error: function () {
+                    alert("访问服务器失败");
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+<blockquote class="layui-elem-quote">
+    用户分析
+</blockquote>
+<div class="layui-row">
+    <div class="layui-col-xs6">
+      <div class="layui-card">
+          <div class="layui-card-header layui-bg-blue">
+              柱状图
+          </div>
+          <div class="layui-card-body" id="bar" style="width: 300px; height: 300px">
+
+          </div>
+      </div>
+
+    </div>
+    <div class="layui-col-xs6">
+        <div class="layui-card">
+            <div class="layui-card-header layui-bg-cyan">
+                仪表图
+            </div>
+            <div class="layui-card-body" id="gauge" style="width: 300px; height: 300px">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="layui-row">
+    <div class="layui-col-xs6">
+        <div class="layui-card">
+            <div class="layui-card-header layui-bg-green">
+                折线图
+            </div>
+            <div class="layui-card-body">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-col-xs6">
+        <div class="layui-card">
+            <div class="layui-card-header layui-bg-orange">
+              雷达图
+            </div>
+            <div class="layui-card-body">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

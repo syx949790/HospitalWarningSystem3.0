@@ -10,16 +10,16 @@
        select  * from  tb_user
     </select>
     <select id="findCountUser" resultType="int">
-        select count(*) from tb_user   /*count (*)   如果 两者分开 则报错  */
+        select count(*) from tb_user inner join tb_userInfo on tb_user.uname=tb_userInfo.uname   /*count (*)   如果 两者分开 则报错  */
     </select>
 
 
     <!--张建军老师-->
     <select id="findAllUser" parameterType="map" resultType="map">
-        select * from tb_user
+        select * from tb_user inner join tb_userInfo on tb_user.uname=tb_userInfo.uname
         <where>
             <if test="uname!=null">
-                and uname like concat("%",concat(#{uname},"%"))
+                and tb_user.uname like concat("%",concat(#{uname},"%"))
             </if>
 
         </where>
@@ -48,5 +48,9 @@
         </foreach>-->
 
     </delete>
+
+    <select id="userGenderAnalysis" resultType="map">
+        select gender ,count(*) as 'count' from tb_userInfo GROUP BY gender;
+    </select>
 
 </mapper>

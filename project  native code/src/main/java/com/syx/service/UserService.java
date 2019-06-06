@@ -58,4 +58,10 @@ public class UserService implements IUserService {
 
         return flag;
     }
+
+    @Override
+    public List<Map<String, Object>> userGenderAnalysis() {
+        List<Map<String, Object>> list = userDao.userGenderAnalysis();
+        return list;
+    }
 }

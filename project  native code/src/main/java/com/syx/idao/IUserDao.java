@@ -18,4 +18,7 @@ public interface IUserDao {
     int insertUser(Map map);
 
     int deleteUserById(String id);
+
+    List<Map<String, Object>> userGenderAnalysis();
+
 }

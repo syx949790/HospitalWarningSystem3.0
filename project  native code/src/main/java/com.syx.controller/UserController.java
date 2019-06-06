@@ -168,5 +168,51 @@ for (String str:arr){
 
     }
 
+    @RequestMapping(value = "/userGenderAnalysis.do")
+    @ResponseBody
+    public Map<String, Object> userGenderAnalysis() {
+
+        //先获取userlist列表对象
+        List<Map<String, Object>> list = userService.userGenderAnalysis();
+
+        List<Object> list1=new ArrayList();
+        List<Object> list2 = new ArrayList();
+        for (Map map1:list){
+            list1.add( map1.get("gender"));
+            list2.add( map1.get("count"));
+        }
+
+       Map map=new HashMap();
+       map.put("gender",list1);
+       map.put("count",list2);
+
+
+       return map;
+
+
+    }
+
+
+    @RequestMapping(value = "/manPercent.do")
+    @ResponseBody
+    public double manPercent() {
+
+        //先获取userlist列表对象
+        List<Map<String, Object>> list = userService.userGenderAnalysis();
+        int count=0;
+        int man=0;
+        for (Map map1:list){
+            if(map1.get("gender").toString().equals("男")){
+                man=Integer.parseInt(map1.get("count").toString());
+            }
+            count+=Integer.parseInt(map1.get("count").toString());
+        }
+
+
+        return (double)man/count;
+
+
+    }
+
 
 }
