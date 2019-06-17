@@ -75,15 +75,17 @@ for (String str:arr){
 
     @RequestMapping("/insertUser.do")
     @ResponseBody
-    public String insertUser(String uname, String upwd, String role) {
+    public String insertUser(String uname, String upwd, String runame, String address,String role) {
 
         Map map = new HashMap();
         map.put("uname", uname);
         map.put("upwd", upwd);
+        map.put("address", address);
+        map.put("runame", runame);
         map.put("role", role);
 
         int flag = userService.insertUser(map);
-
+        System.out.println("insertUser  success!" );
 
         if (flag == 1) {
             return "success";

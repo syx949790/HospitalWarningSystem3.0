@@ -37,8 +37,15 @@
 
 <!--必须用parameterType     parameterMap错误-->
     <insert id="insertUser" parameterType="map">
-          insert into  tb_user(uname,upwd,role,registerTime,lastLoginTime) values (#{uname},md5(#{upwd}),#{role},now(),now())
+          insert into  tb_user(uname,upwd,role,registerTime,lastLoginTime) values (#{uname},md5(#{upwd}),#{role},now(),now());
+
     </insert>
+    <insert id="insertUserInfo" parameterType="map">
+
+          insert into  tb_userinfo(uname,runame,gender,email,address,telephone,birthday,remark) values (#{uname},#{runame},'男','110@qq.com',#{address},'110',now(),'exceedingly nice');
+    </insert>
+
+
 
     <delete id="deleteById"  parameterType="String">
         delete from tb_user where id =#{id}

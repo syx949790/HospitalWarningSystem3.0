@@ -28,9 +28,9 @@ public class UserDao implements IUserDao {
         map.put("upwd", upwd2);
 
 
-        System.out.println("fail50");
+        System.out.println("register fail");
         int flag = sqlSession.insert(sql, map);
-        System.out.println("success");
+        System.out.println("register success");
         return flag;
     }
 
@@ -40,9 +40,13 @@ public class UserDao implements IUserDao {
         String sql = "com.syx.mapper.userMapper.insertUser";
 
 
-        System.out.println("fail");
+        System.out.println(" insertUser fail");
         int flag = sqlSession.insert(sql, map);
-        System.out.println("success");
+
+
+        String sql1 = "com.syx.mapper.userMapper.insertUserInfo";
+        int flag1=sqlSession.insert(sql1,map);
+
         return flag;
 
     }
@@ -85,8 +89,9 @@ public class UserDao implements IUserDao {
     public List<Map<String, Object>> UserList() {
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
         String sql = "com.syx.mapper.userMapper.findUserAll";
+        System.out.println("userlist" + "size");
         List<Map<String, Object>> list = sqlSession.selectList(sql);
-        System.out.println(list.size() + "size");
+        System.out.println("userlist"+list.size() + "size");
         return list;
     }
 
@@ -104,8 +109,9 @@ public class UserDao implements IUserDao {
     public List<Map<String, Object>> findAllUser(Map map) {
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
         String sql = "com.syx.mapper.userMapper.findAllUser";
+        System.out.println("findAllUser  fail！");
         List<Map<String, Object>> list = sqlSession.selectList(sql, map);
-
+        System.out.println("findAllUser  success！");
         return list;
     }
 
