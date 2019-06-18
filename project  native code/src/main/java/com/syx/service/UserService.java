@@ -64,4 +64,10 @@ public class UserService implements IUserService {
         List<Map<String, Object>> list = userDao.userGenderAnalysis();
         return list;
     }
+
+    @Override
+    public int updatePhoto(Map map) {
+        int i = userDao.updatePhoto(map);
+        return i;
+    }
 }

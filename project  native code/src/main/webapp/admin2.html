@@ -18,6 +18,10 @@
         function loadUserAnalysis() {
             $("#mainFrame").load("userAnalysis.html");
         }
+        function loadPersonalCenterPage() {
+            $("#mainFrame").load("personalCenter.html");
+        }
+
     </script>
 </head>
 <body class="layui-layout-body">
@@ -45,7 +49,7 @@
                     张三
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href=""><span class="layui-icon layui-icon-user"></span> 基本资料</a></dd>
+                    <dd><a href="javascript:loadPersonalCenterPage()"><span class="layui-icon layui-icon-user"></span> 基本资料</a></dd>
                     <dd><a href=""><span class="layui-icon layui-icon-password"></span> 修改密码</a></dd>
                 </dl>
             </li>

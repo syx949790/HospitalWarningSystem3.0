@@ -18,4 +18,5 @@ public interface IUserService {
     int insertUser(Map map);
 
     List<Map<String, Object>> userGenderAnalysis();
+    int updatePhoto(Map map);
 }

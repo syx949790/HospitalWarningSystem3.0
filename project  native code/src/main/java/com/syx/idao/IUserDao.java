@@ -21,4 +21,6 @@ public interface IUserDao {
 
     List<Map<String, Object>> userGenderAnalysis();
 
+    int updatePhoto(Map map);
+
 }

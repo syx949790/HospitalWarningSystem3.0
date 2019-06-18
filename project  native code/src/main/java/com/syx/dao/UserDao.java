@@ -71,6 +71,17 @@ public class UserDao implements IUserDao {
     }
 
     @Override
+    public int updatePhoto(Map map) {
+
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        String sql = "com.syx.mapper.userMapper.updatePhoto";
+
+        int i = sqlSession.update(sql,map);
+        System.out.println(i);
+        return i;
+    }
+
+    @Override
     public List<Map<String, Object>> login(String uname, String upwd) {
 
 

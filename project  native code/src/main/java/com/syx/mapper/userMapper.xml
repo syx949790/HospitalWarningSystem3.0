@@ -60,4 +60,9 @@
         select gender ,count(*) as 'count' from tb_userInfo GROUP BY gender;
     </select>
 
+
+    <update id="updatePhoto" parameterType="map">
+        update  tb_user set photo = #{photo} where uname=#{uname}
+    </update>
+
 </mapper>
