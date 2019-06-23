@@ -23,4 +23,6 @@ public interface IUserDao {
 
     int updatePhoto(Map map);
 
+    int updateUser(Map map);
+
 }

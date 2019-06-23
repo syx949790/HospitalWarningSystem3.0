@@ -70,4 +70,10 @@ public class UserService implements IUserService {
         int i = userDao.updatePhoto(map);
         return i;
     }
+
+    @Override
+    public int updateUser(Map map) {
+        int i = userDao.updateUser(map);
+        return i;
+    }
 }

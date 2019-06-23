@@ -25,6 +25,29 @@ public class UserController {
     @Resource
     UserService userService;
 
+
+
+
+    @RequestMapping("/updateUser.do")
+    @ResponseBody
+    public String UpdateUser(String id,String uname,String password,String email,String address,String telephone){
+        System.out.println(id+" "+uname+" "+telephone);
+        int uid = Integer.parseInt(id);
+        Map map = new HashMap();
+        map.put("id",uid);
+        map.put("uname",uname);
+        map.put("password",password);
+        map.put("email",email);
+        map.put("address",address);
+        map.put("telephone",telephone);
+
+        int i = userService.updateUser(map);
+        if (i != 0)
+            return "success";
+        else
+            return "fails";
+
+    }
     @RequestMapping("/show.do")
     @ResponseBody
     public List showTest() {
@@ -45,6 +68,8 @@ public class UserController {
     @ResponseBody
     public Map uploadPhoto(MultipartFile file,HttpSession session) throws IOException {
 
+
+        System.out.println(session.getAttribute("uname"));
         List allowPhotoTypeList =new ArrayList();
         allowPhotoTypeList.add(".jpg");
         allowPhotoTypeList.add(".png");
@@ -56,26 +81,30 @@ public class UserController {
 
         Map map=new HashMap();
         String fileName= file.getOriginalFilename();
-        System.out.println("上传文件名:"+fileName);
+
         String extName =fileName.substring(fileName.lastIndexOf("."));
         String newFileName= new Date().getTime()+extName;
         if (allowPhotoTypeList.contains(extName)){
 
-            String realPath="D:/images";
+            //String realPath=session.getServletContext().getRealPath("images");
+            String  realPath = "D:\\eclipse\\HospitalWarningSystem1.5.5\\project  native code\\src\\main\\webapp\\images";
+
+            System.out.println(realPath);
 
             File target=new File(realPath);
             if (!target.exists())
                 target.mkdir();
 
-            target=new File(realPath,file.getOriginalFilename());
+            target=new File(realPath,newFileName);
             file.transferTo(target);
 
 
 
             map.put("uname",session.getAttribute("uname"));
-            map.put("photo",realPath+"/"+newFileName);
+
+            map.put("photo","images"+'\\'+newFileName);
             userService.updatePhoto(map);
-            System.out.println("uploadPhoto success");
+            System.out.println(newFileName);
             map.clear();
             map.put("code",0);
         }else {
@@ -156,19 +185,26 @@ for (String str:arr){
 
         List<Map<String, Object>> list = userService.login(uname, upwd);
         if (list.size() > 0){
-            session.setAttribute("uname",uname);
+             session.setAttribute("uname",uname);
+
+
+
             return "success";
         }
 
         else
-            return "falis";
+            return "fails";
 
     }
+
+
+
 
 
     @RequestMapping(value = "/findAllUser.do")
     @ResponseBody
     public Map<String, Object> findAllUser(String uname, int page, int limit) {
+
 
 
         Map map = new HashMap();
@@ -193,7 +229,38 @@ for (String str:arr){
 
 
 
+    @RequestMapping(value = "/findUserByUname.do")
+    @ResponseBody
+    public Map<String, Object> findUserByUname( String  page, String limit,HttpSession session) {
 
+
+       int p= Integer.parseInt(page);
+       int l = Integer.parseInt(limit);
+
+        System.out.println(session.getAttribute("uname") +" "+p+ " " + l);
+        Map map = new HashMap();
+        map.put("uname", session.getAttribute("uname"));
+        map.put("recordIndex", (p - 1) * l);
+        map.put("pagesize", l);
+
+
+        List<Map<String, Object>> list = userService.findAllUser(map);
+
+        Map map1 = new HashMap();
+        map1 = list.get(0);
+        map.clear();
+
+        map.put("uname",map1.get("uname"));
+        map.put("photo",map1.get("photo"));
+
+
+
+
+
+        return map;
+
+
+    }
 
 
 

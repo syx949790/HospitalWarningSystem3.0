@@ -68,7 +68,7 @@
     <div class="layui-col-sm4 ">
         <div align="center" class="layui-upload layui-layout-right">
             <div class="layui-upload-list">
-                <img class="layui-upload-img layui-circle" style="width: 120px;height: 150px" id="demo1" src="">
+                <img class="layui-upload-img layui-circle" style="width: 120px;height: 150px" id="demo1" src="images\1561193751184.jpg">
                 <p id="demoText"></p>
             </div>
             <button type="button" class="layui-btn" id="test1">上传图片</button>
@@ -77,6 +77,34 @@
     </div>
 </div>
 <script type="text/javascript">
+
+
+    $(function () {
+        loadPhotoAndUname();
+
+    })
+    function loadPhotoAndUname(){
+        $.ajax({
+            url: 'user/findUserByUname.do',
+            method:'post',
+            data:{"page":"1","limit":"10"},
+            success:function (result) {
+                if (JSON.parse(result) != null){
+
+                    alert(JSON.parse(result).photo);
+                    $("#demo1").attr('src',JSON.parse(result).photo);
+                }
+
+                else
+                    alert("未获取数据！")
+            },
+            error:function () {
+                alert("访问服务器失败！");
+            }
+        })
+    }
+
+
     layui.use("upload",function () {
         var $ = layui.jquery
             ,upload = layui.upload;

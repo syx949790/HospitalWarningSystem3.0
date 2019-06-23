@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syx.mapper.supplyMapper">
+    <select id="findAllSupply" parameterType="map" resultType="map">
+        select * from tb_supply
+        <where>
+            <if test="supply_name!=null">
+                and supply_name = #{supply_name}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="findAllCount" resultType="int">
+        select  count(*) from tb_supply
+    </select>
+</mapper>

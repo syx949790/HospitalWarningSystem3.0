@@ -104,7 +104,7 @@
                     cache: false,
                     data: $("#loginForm").serialize(),//表单序列化
                     success: function (result) {
-                        if (JSON.parse(result) == "success") {
+                        if (JSON.parse(result) == "success"){
 
 
                             window.location.href = "admin2.html";

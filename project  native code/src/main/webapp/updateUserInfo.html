@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>医疗设备检修预警系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="jquery/jquery3.4.1.js"></script>
+    <script>
+        var uid;
+        function setId(id){
+            uid=id;
+            console.log("收到 id="+id);
+        }
+
+        function UpdateUser() {
+            $.ajax({
+                url:'user/updateUser.do',
+                method:'post',
+                data:{"id":uid,"uname": $('#uname').val(),
+                "password":$('#password').val(),"email":$('#email').val(),
+                "address":$('#address').val(),"telephone":$('#telephone').val()},
+
+                success:function (data) {
+                    if (JSON.parse(data) == "success") {
+                        alert("更新users成功");
+
+
+                    } else {
+                        alert("更新 失败");
+                    }
+                },
+                error: function () {
+                    alert("连接服务器失败");
+                }
+            });
+
+
+        }
+    </script>
+
+</head>
+<body style="margin-right: 50px">
+<br>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" id="uname"  autocomplete="off" placeholder="请输入用户名" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+            <input type="text" id="password"  autocomplete="off" placeholder="请输入密码" class="layui-input">
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">email</label>
+        <div class="layui-input-block">
+            <input type="text" id="email"   placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">address</label>
+        <div class="layui-input-block">
+            <input type="text" id="address"   placeholder="请输入地址" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">telephone</label>
+        <div class="layui-input-block">
+            <input type="text" id="telephone"   placeholder="请输入电话" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn"  lay-filter="demo1" onclick="UpdateUser()">确认更改</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <br>
+</form>
+<script type="text/javascript" src="layui/layui.all.js"></script>
+</body>
+</html>

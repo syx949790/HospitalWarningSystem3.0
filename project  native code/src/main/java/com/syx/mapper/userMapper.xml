@@ -13,6 +13,46 @@
         select count(*) from tb_user inner join tb_userInfo on tb_user.uname=tb_userInfo.uname   /*count (*)   如果 两者分开 则报错  */
     </select>
 
+    <update id="updateUser" parameterType="map">
+        update tb_user
+        <set>
+            <if test="uname!=null">
+               uname = #{uname},
+            </if>
+            <if test="password!=null">
+                upwd = #{password},
+            </if>
+
+
+
+        </set>
+        where id = #{id}
+
+    </update>
+
+    <update id="updateUser1" parameterType="map">
+        update tb_userInfo
+        <set>
+
+            <if test="address!=null">
+                address = #{address},
+            </if>
+
+            <if test="telephone!=null">
+                telephone = #{telephone},
+            </if>
+            <if test="email!=null">
+                email = #{email},
+            </if>
+
+        </set>
+        where uname = #{uname}
+
+    </update>
+
+
+
+
 
     <!--张建军老师-->
     <select id="findAllUser" parameterType="map" resultType="map">
@@ -23,6 +63,7 @@
             </if>
 
         </where>
+
         limit #{recordIndex},#{pagesize}
     </select>
 

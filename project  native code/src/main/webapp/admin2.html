@@ -10,17 +10,34 @@
         $(function () {
             $("#mainFrame").load("welcome.html");
         });
+        function load(ral) {
+            $("#mainFrame").load(ral);
+        }
 
-        function loadUserManage() {
+       /* function loadUserManage() {
             $("#mainFrame").load("userManage.html");
 
         }
         function loadUserAnalysis() {
             $("#mainFrame").load("userAnalysis.html");
         }
+
+        function loadDeviceManage() {
+            $("#mainFrame").load("deviceManage.html");
+        }
         function loadPersonalCenterPage() {
             $("#mainFrame").load("personalCenter.html");
         }
+        function loadEquipManage() {
+            alert("1111");
+            $("#mainFrame").load("equipManage.html");
+        }
+        function test() {
+            alert("111");
+        }*/
+
+
+
 
     </script>
 </head>
@@ -45,11 +62,12 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    张三
+                    <img src="images/1560866511338.jpg" class="layui-nav-img" id="top_photo">
+
+                    <span id="login_uname" >zhangsan</span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:loadPersonalCenterPage()"><span class="layui-icon layui-icon-user"></span> 基本资料</a></dd>
+                    <dd><a href="javascript:load('personalCenter.html')"><span class="layui-icon layui-icon-user"></span> 基本资料</a></dd>
                     <dd><a href=""><span class="layui-icon layui-icon-password"></span> 修改密码</a></dd>
                 </dl>
             </li>
@@ -64,16 +82,16 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;"><span class="layui-icon layui-icon-user"></span> 所有用户</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:loadUserManage()"><span class="layui-icon layui-icon-app"></span>
+                        <dd><a href="javascript:load('userManage.html')"><span class="layui-icon layui-icon-app"></span>
                             用户管理</a></dd>
-                        <dd><a href="javascript:loadUserAnalysis()"><span class="layui-icon layui-icon-chart-screen"></span> 统计分析</a>
+                        <dd><a href="javascript:load('userAnalysis.html')"><span class="layui-icon layui-icon-chart-screen"></span> 统计分析</a>
                         </dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;"><span class="layui-icon layui-icon-cellphone"></span> 所有设备</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"><span class="layui-icon layui-icon-camera"></span> 设备管理</a></dd>
+                        <dd><a href="javascript:load('equipManage.html')"><span class="layui-icon layui-icon-camera"></span> 设备管理</a></dd>
                         <dd><a href="javascript:;"><span class="layui-icon layui-icon-chart-screen"></span> 统计分析</a>
                         </dd>
                     </dl>
@@ -81,7 +99,7 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;"><span class="layui-icon layui-icon-water"></span> 检修日志</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"><span class="layui-icon layui-icon-date"></span> 日志管理</a></dd>
+                        <dd><a href="javascript:load('deviceManage.html');"><span class="layui-icon layui-icon-date"></span> 日志管理</a></dd>
                         <dd><a href="javascript:;"><span class="layui-icon layui-icon-chart-screen"></span> 统计分析</a>
                         </dd>
                     </dl>
@@ -89,7 +107,7 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;"><span class="layui-icon layui-icon-group"></span> 所有供应商</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;"><span class="layui-icon layui-icon-set-fill"></span> 供应商管理</a></dd>
+                        <dd><a href="javascript:load('supplyManage.html');"><span class="layui-icon layui-icon-set-fill"></span> 供应商管理</a></dd>
                         <dd><a href="javascript:;"><span class="layui-icon layui-icon-chart"></span> 统计分析</a></dd>
                     </dl>
                 </li>
@@ -121,6 +139,32 @@
         var element = layui.element;
 
     });
+
+    $(function () {
+        loadPhotoAndUname();
+
+    })
+    function loadPhotoAndUname(){
+        $.ajax({
+            url: 'user/findUserByUname.do',
+            method:'post',
+            data:{"page":"1","limit":"10"},
+            success:function (result) {
+                if (JSON.parse(result) != null){
+
+                    alert((JSON.parse(result)).photo + " "+(JSON.parse(result)).uname);
+                    $("#top_photo").attr('src',JSON.parse(result).photo);
+                    $("#login_uname").innerText = JSON.parse(result).uname;
+                }
+
+                else
+                    alert("未获取数据！")
+            },
+            error:function () {
+                alert("访问服务器失败！");
+            }
+        })
+    }
 </script>
 </body>
 </html>

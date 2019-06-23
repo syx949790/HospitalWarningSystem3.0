@@ -128,13 +128,21 @@
             });
         }
 
-        function addUserInfo() {
+        function UpdateUserInfo(id) {
             layer.open({
                 type: 2,
-                title:"添加用户信息",
+                title:"更改用户信息",
                 closeBtn:1,//不显示关闭按钮
                 area:['340px','250px'],
-                content:"admin.html",
+                content:"updateUserInfo.html",
+                success: function (layero, index) {
+                    // 获取子页面的iframe
+                    var iframe = window['layui-layer-iframe' + index];
+                    // 向子页面的全局函数child传参
+                    //iframe.UpdateUser(id);
+                    iframe.setId(id);
+                }
+
             })
         }
         function loadAllUserInfo() {
@@ -162,7 +170,7 @@
                         {
                             field: 'id', width: '160', title: '操作', templet: function (row) {
                                 var del = '<a href="javascript:DeleteUser('+row.id+')" title="删除"><span  class="layui-icon layui-icon-delete"></span></a>';
-                                var update = "<a href='' title='更新'><span style='' class='layui-icon layui-icon-table'></span></a>";
+                                var update = '<a href="javascript:UpdateUserInfo('+row.id+')" title="更新"><span  class="layui-icon layui-icon-edit"></span></a>';
                                 return del + "<span>|</span>" + update;
                             }, sort: true
                         },
@@ -171,6 +179,7 @@
 
                 });
 
+                return false;
             });
         }
     </script>
