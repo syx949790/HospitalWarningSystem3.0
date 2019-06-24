@@ -154,7 +154,8 @@
 
                     alert((JSON.parse(result)).photo + " "+(JSON.parse(result)).uname);
                     $("#top_photo").attr('src',JSON.parse(result).photo);
-                    $("#login_uname").innerText = JSON.parse(result).uname;
+                    var flag= JSON.parse(result).uname;
+                    $("#login_uname").text(flag);
                 }
 
                 else
