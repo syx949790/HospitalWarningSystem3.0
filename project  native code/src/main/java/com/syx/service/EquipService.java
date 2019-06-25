@@ -23,4 +23,22 @@ public class EquipService implements IEquipService {
         int flag= equipDao.findAllCount();
         return flag;
     }
+
+    @Override
+    public int deleteDeviceById(int id) {
+        int flag= equipDao.deleteDeviceById(id);
+        return flag;
+    }
+
+    @Override
+    public int updateDeviceById(Map map) {
+        int flag= equipDao.updateDeviceById(map);
+        return flag;
+    }
+
+    @Override
+    public int insertDevice(Map map) {
+        int flag= equipDao.insertDevice(map);
+        return flag;
+    }
 }

@@ -16,6 +16,41 @@
         $(function () {
             loadSupplyManage();
         });
+        
+        
+        function updateSupply(id) {
+            layer.open({
+                type: 2,
+                title:"更改供应商信息",
+                closeBtn:1,//不显示关闭按钮
+                area:['350px','250px'],
+                content:"updateSupplyInfo.html",
+                success: function (layero, index) {
+                    // 获取子页面的iframe
+                    var iframe = window['layui-layer-iframe' + index];
+                    // 向子页面的全局函数child传参
+                    //iframe.UpdateUser(id);
+                    iframe.setId(id);
+                }
+
+            })
+            
+        }
+        function insertSupply() {
+            layer.open({
+                type: 2,
+                title:"添加设备信息",
+                closeBtn:1,//不显示关闭按钮
+                area:['350px','250px'],
+                content:"insertDeviceInfo.html",
+
+
+
+            })
+        }
+        function deleteSupply() {
+            
+        }
         function loadSupplyManage() {
             //编写layui的ajax json 异步
             layui.use('table', function () {
@@ -41,8 +76,8 @@
 
                         {
                             field: 'id', width: '10s0', title: '操作', templet: function (row) {
-                                var del = '<a href="" title="删除"><span  class="layui-icon layui-icon-delete"></span></a>';
-                                var update = "<a href='' title='更新'><span style='' class='layui-icon layui-icon-edit'></span></a>";
+                                var del = '<a href="javascript:deleteSupply('+row.id+')" title="删除"><span  class="layui-icon layui-icon-delete"></span></a>';
+                                var update = '<a href="javascript:updateSupply('+row.id+')" title="更新"><span  class="layui-icon layui-icon-edit"></span></a>';
 
                                 return del + "<span>|</span>" + update+"<span>|</span>"+"<a href=''>详情</a>";
                             }, sort: true
@@ -76,6 +111,8 @@
 
 
         <a href="javascript:loadSupplyManage()" class="layui-btn "><span class="layui-icon layui-icon-search"></span>查询</a>
+        <a href="javascript:insertDevice()"  style="background-color: #00838F; color: white; margin-left: 2px;"><span
+                class="	glyphicon glyphicon-plus" ></span>添加设备</a>
 
     </div>
 </script>

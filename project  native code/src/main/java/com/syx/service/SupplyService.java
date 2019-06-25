@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SupplyService implements ISupplyService {
+public class SupplyService  implements ISupplyService {
     @Autowired
     SupplyDao supplyDao;
     @Override
@@ -24,6 +24,24 @@ public class SupplyService implements ISupplyService {
     @Override
     public int findAllCount() {
        int flag = supplyDao.findAllCount();
+        return flag;
+    }
+
+    @Override
+    public int deleteSupplyById(int id) {
+       int flag = supplyDao.deleteSupplyById(id);
+        return flag;
+    }
+
+    @Override
+    public int updateSupplyById(Map map) {
+        int flag = supplyDao.updateSupplyById(map);
+        return flag;
+    }
+
+    @Override
+    public int insertSupply(Map map) {
+        int flag = supplyDao.insertSupply(map);
         return flag;
     }
 }

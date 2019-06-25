@@ -4,11 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>医疗设备检修预警系统</title>
-    <link rel="stylesheet" href="layui/css/layui.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script type="text/javascript" src="jquery/jquery3.4.1.js"></script>
-    <script type="text/javascript" src="layui/layui.all.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
         .modal-body {
             height: 220px;
@@ -133,7 +135,7 @@
                 type: 2,
                 title:"更改用户信息",
                 closeBtn:1,//不显示关闭按钮
-                area:['340px','250px'],
+                area:['100px','100px'],
                 content:"updateUserInfo.html",
                 success: function (layero, index) {
                     // 获取子页面的iframe
@@ -144,6 +146,18 @@
                 }
 
             })
+        }
+        function insertUser() {
+            layer.open({
+                type: 2,
+                title:"添加用户信息",
+                closeBtn:1,//不显示关闭按钮
+                area:['350px','250px'],
+                content:"insertUserInfo.html",
+
+
+            })
+
         }
         function loadAllUserInfo() {
             //编写layui的ajax json 异步
@@ -164,9 +178,9 @@
                         {field: 'id', width: '40', title: 'ID', sort: true},
                         {field: 'uname', width: '100', title: '用户名', sort: true},
                         {field: 'role', width: '100', title: '职位', sort: true},
-                        {field: 'email', width: '100', title: '邮箱', sort: true},
-                        {field: 'registerTime', width: '160', title: '注册时间', sort: true},
-                        {field: 'lastLoginTime', width: '160', title: '最后登录时间', sort: true},
+                        {field: 'email', width: '150', title: '邮箱', sort: true},
+                        {field: 'registerTime', width: '150', title: '注册时间', sort: true},
+                        {field: 'lastLoginTime', width: '150', title: '最后登录时间', sort: true},
                         {
                             field: 'id', width: '160', title: '操作', templet: function (row) {
                                 var del = '<a href="javascript:DeleteUser('+row.id+')" title="删除"><span  class="layui-icon layui-icon-delete"></span></a>';
@@ -195,77 +209,17 @@
 
 
 
+
      <div class="layui-inline" style="left: 0px">
   <input id="tool_uname" class="layui-input-block " placeholder="请输入用户名">
   <a href="javascript:loadAllUserInfo()" class="layui-btn layui-btn-danger"><span class="layui-icon layui-icon-search"></span>搜索</a>
          <a href="javascript:refreshTable()" class="layui-btn layui-btn-danger"><span class="layui-icon layui-icon-refresh"></span>刷新</a>
          <a href="javascript:deleteBenchById()" class="layui-btn layui-btn-danger"><span class="layui-icon layui-icon-delete "></span>删除用户</a>
   </div>
-  <a data-toggle="modal" data-target="#mainModel"  class="layui-btn layui-btn-danger"> <span class="layui-icon layui-icon-add-circle"></span>添加用户</a>
+  <a href="javascript:insertUser()"  class="layui-btn layui-btn-danger"> <span class="layui-icon layui-icon-add-circle"></span>添加用户</a>
 </script>
 
 
-<!--div隐藏的效果，data-target="#mainModel"会触发隐藏的div显示为模态框的效果，指的是整个区域，处于暗黑色的样式-->
-<div class="modal fade" id="mainModel" tabindex="-1" role="dialog" aria-hidden="true">
-    <!--模态对话框  悬浮框-->
-    <div class="modal-dialog">
-        <!-- 模态框主题内容-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">用户添加</h4>
-            </div>
-            <div class="modal-body">
-                <form action="#" class="form-horizontal" id="formUsers">
-                    <!--用户名-->
-                    <div class="form-group row">
-                        <label class="control-label col-md-4">员工姓名:</label>
-                        <div class="col-md-6 col-xs-11">
-                            <input class="form-control" name="name" id="uname" size="16" type="text" value="">
-                        </div>
-                    </div>
-                    <!--用户密码-->
-                    <div class="form-group row">
-                        <label class="control-label col-md-4">员工密码:</label>
-                        <div class="col-md-6 col-xs-11">
-                            <input class="form-control" name="upwd" id="upwd" size="16" type="password" value="">
-                        </div>
-                    </div>
-                    <!--用户真实姓名-->
-                    <div class="form-group row">
-                        <label class="control-label col-md-4">真实姓名:</label>
-                        <div class="col-md-6 col-xs-11">
-                            <input class="form-control" name="runame" id="runame" size="16" type="text" value="">
-                        </div>
-                    </div>
-                    <!--用户地址-->
-                    <div class="form-group row">
-                        <label class="control-label col-md-4">员工地址:</label>
-                        <div class="col-md-6 col-xs-11">
-                            <input class="form-control" name="address" id="address" size="16" type="text" value="">
-                        </div>
-                    </div>
-                    <!--role-->
-                    <div class="form-group row">
-                        <label class="control-label col-md-4">员工姓名:</label>
-                        <div class="col-md-6 col-xs-11">
-                            <select class="form-control input-sm m-bot15" name="role" id="role">
-                                <option value="admin">管理员</option>
-                                <option value="employee">职员</option>
-                                <option value="checker">检修员</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--按钮-->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="inserButton">Submit</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 </body>
 </html>

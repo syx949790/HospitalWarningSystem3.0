@@ -35,4 +35,32 @@ public class EquipDao implements IEquipDao {
         int flag = sqlSession.selectOne(sql);
         return flag;
     }
+
+    @Override
+    public int deleteDeviceById(int id) {
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        String sql = "com.syx.mapper.equipMapper.deleteDeviceById";
+        int flag = sqlSession.delete(sql,id);
+        System.out.println("deleteDeviceById"+flag);
+        return flag;
+    }
+
+    @Override
+    public int updateDeviceById(Map map) {
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        String sql = "com.syx.mapper.equipMapper.updateDeviceById";
+        int flag = sqlSession.update(sql,map);
+        System.out.println("updateDeviceById"+flag);
+        return flag;
+
+    }
+
+    @Override
+    public int insertDevice(Map map) {
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        String sql = "com.syx.mapper.equipMapper.insertDevice";
+        int flag = sqlSession.insert(sql,map);
+        System.out.println("insertDeviceById"+flag);
+        return flag;
+    }
 }

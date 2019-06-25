@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="jquery/jquery3.4.1.js"></script>
+    <script type="text/javascript" src="layui/layui.all.js"></script>
+    <script>
+        var uid;
+        function setId(id) {
+            uid = id;
+            alert(uid);
+
+        }
+
+        function UpdateSupply() {
+            $.ajax({
+                url:'equip/updateSupply.do',
+                method:'post',
+                data:{
+                    "id":uid,
+                    "supply_name":$("#supply_name").val(),
+                    "business_license":$("#business_license").val(),
+                    "equip_license":$("#equip_license").val()
+                },
+                success:function (result) {
+                    if (JSON.parse(result)=="success")
+                        alert("更新设备成功！")
+                    else
+                        alert("更新设备失败！")
+                },
+                error:function () {
+                    alert("访问服务器失败！")
+                },
+
+            });
+
+        }
+
+    </script>
+</head>
+<body style="margin-right: 50px">
+
+<form class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">供应商名称</label>
+        <div class="layui-input-block">
+            <input type="text" id="supply_name"  autocomplete="off" placeholder="请输入供应商名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">营业执照编号</label>
+        <div class="layui-input-block">
+            <input type="text" id="business_license"  autocomplete="off" placeholder="请输入营业编号" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">仪器许可证编号</label>
+        <div class="layui-input-block">
+            <input type="text" id="equip_license"  autocomplete="off" placeholder="请输入仪器许可证编号" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn"  lay-filter="demo1" onclick="UpdateSupply()">确认更改</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

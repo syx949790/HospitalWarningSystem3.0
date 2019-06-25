@@ -28,4 +28,29 @@ public class SupplyDao implements ISupplyDao {
         int flag= sqlSession.selectOne(sql);
         return flag;
     }
+
+    @Override
+    public int deleteSupplyById(int id) {
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        String sql = "com.syx.mapper.supplyMapper.deleteSupplyById";
+        int flag= sqlSession.delete(sql,id);
+        return flag;
+    }
+
+    @Override
+    public int updateSupplyById(Map map) {
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        String sql = "com.syx.mapper.supplyMapper.updateSupplyById";
+        int flag= sqlSession.update(sql,map);
+        return flag;
+    }
+
+    @Override
+    public int insertSupply(Map map) {
+
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        String sql = "com.syx.mapper.supplyMapper.insertSupply";
+        int flag= sqlSession.insert(sql,map);
+        return flag;
+    }
 }

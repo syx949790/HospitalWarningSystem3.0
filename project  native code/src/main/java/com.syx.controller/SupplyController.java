@@ -31,4 +31,21 @@ public class SupplyController {
         map.put("count", count);
         return  map;
     }
+
+
+    @RequestMapping("/updateSupply.do")
+    @ResponseBody
+    public String updateSupply(String supply_name,String business_license ,String equip_license){
+
+        Map map = new HashMap();
+        map.put("supply_name",supply_name);
+        map.put("business_license",business_license);
+        map.put("equip_license",equip_license);
+
+        int flag = supplyService.updateSupplyById(map);
+        if (flag !=0)
+        return  "success";
+        else
+            return "fails";
+    }
 }

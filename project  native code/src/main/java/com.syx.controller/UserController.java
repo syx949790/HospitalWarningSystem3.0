@@ -123,10 +123,10 @@ public class UserController {
 
     @RequestMapping("/register.do")
     @ResponseBody
-    public String register(String uname2, String upwd2) {
+    public String register(String uname, String upwd) {
 
 
-        int flag = userService.register(uname2, upwd2);
+        int flag = userService.register(uname, upwd);
 
 
         if (flag == 1) {

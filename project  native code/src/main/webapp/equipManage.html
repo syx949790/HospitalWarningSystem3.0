@@ -4,11 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>医疗设备检修预警系统</title>
-    <link rel="stylesheet" href="layui/css/layui.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script type="text/javascript" src="jquery/jquery3.4.1.js"></script>
-    <script type="text/javascript" src="layui/layui.all.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
 
 
@@ -16,6 +18,59 @@
         $(function () {
             loadEquipManage();
         });
+        
+        function UpdateDeviceInfo(id) {
+            layer.open({
+                type: 2,
+                title:"更改设备信息",
+                closeBtn:1,//不显示关闭按钮
+                area:['350px','250px'],
+                content:"updateDeviceInfo.html",
+                success: function (layero, index) {
+                    // 获取子页面的iframe
+                    var iframe = window['layui-layer-iframe' + index];
+                    // 向子页面的全局函数child传参
+                    //iframe.UpdateUser(id);
+                    iframe.setId(id);
+                }
+
+            })
+            
+        };
+        function insertDevice(){
+            layer.open({
+                type: 2,
+                title:"添加设备信息",
+                closeBtn:1,//不显示关闭按钮
+                area:['350px','250px'],
+                content:"insertDeviceInfo.html",
+
+
+
+            })
+
+        };
+        function DeleteDevice(id) {
+            $.ajax({
+                url:'equip/deleteDevice.do',
+                method:'post',
+                data:{
+                    "id":id,
+
+                },
+                success:function (result) {
+                    if (JSON.parse(result)=="success")
+                        alert("删除设备成功！")
+                    else
+                        alert("删除设备失败！")
+                },
+                error:function () {
+                    alert("访问服务器失败！")
+                },
+
+            });
+
+        }
         function loadEquipManage() {
             //编写layui的ajax json 异步
             layui.use('table', function () {
@@ -39,12 +94,12 @@
                         {field: 't_check_date', width: '120', title: '上次年检时间', sort: true},
                         {field: 't_check_circle', width: '100', title: '年检周期', sort: true},
                         {field: 't_left_day', width: '120', title: '距离下次检测', sort: true},
-                        {field: 'warning_date', width: '100', title: '提前预警', sort: true},
+                        {field: 'warning_day', width: '100', title: '提前预警', sort: true},
 
                         {
                             field: 'id', width: '10s0', title: '操作', templet: function (row) {
-                                var del = '<a href="" title="删除"><span  class="layui-icon layui-icon-delete"></span></a>';
-                                var update = "<a href='' title='更新'><span style='' class='layui-icon layui-icon-edit'></span></a>";
+                                var del = '<a href="javascript:DeleteDevice('+row.id+')" title="删除"><span  class="layui-icon layui-icon-delete"></span></a>';
+                                var update = '<a href="javascript:UpdateDeviceInfo('+row.id+')" title="更新"><span  class="layui-icon layui-icon-edit"></span></a>';
 
                                 return del + "<span>|</span>" + update+"<span>|</span>"+"<a href=''>详情</a>";
                             }, sort: true
@@ -84,6 +139,9 @@
 
 
         <a href="javascript:loadEquipManage()" class="layui-btn "><span class="layui-icon layui-icon-search"></span>查询</a>
+
+        <a href="javascript:insertDevice()"  style="background-color: #00838F; color: white; margin-left: 2px;"><span
+                class="	glyphicon glyphicon-plus" ></span>添加设备</a>
 
     </div>
 </script>

@@ -16,4 +16,27 @@
     <select id="findAllCount" resultType="int">
         select  count(*) from tb_equip
     </select>
+
+    <delete id="deleteDeviceById" parameterType="int">
+        delete from tb_equip where id = #{id}
+    </delete>
+    <update id="updateDeviceById" parameterType="map">
+        update tb_equip 
+        <set>
+            <if test="t_check_date !=null" >
+             t_check_date = #{t_check_date},
+            </if>
+             <if test="t_left_day !=null">
+                 t_left_day = #{t_left_day},
+             </if>
+             <if test="warning_day !=null">
+                 warning_day = #{warning_day},
+             </if>
+        </set>
+        where id = #{id}
+    </update>
+    <insert id="insertDevice" parameterType="map">
+        insert into tb_equip(medicine_department,t_device_name,t_buy_date,t_check_date,t_check_circle,t_left_day,warning_day) values (#{medicine_department},#{t_device_name},#{t_buy_date},#{t_check_date},#{t_check_circle},#{t_left_day},#{warning_day})
+
+    </insert>
 </mapper>

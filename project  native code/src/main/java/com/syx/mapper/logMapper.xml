@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.syx.mapper.userMapper">
+<mapper namespace="com.syx.mapper.logMapper">
     <select id="findAllDevice" parameterType="map" resultType="map" >
-        select * from tb_device
+        select * from tb_log
         <where>
             <if test="device_name!=null">
                 and device_name  like concat("%",concat(#{device_name},"%"))
@@ -16,6 +16,6 @@
     </select>
 
     <select id="findCountDevice" resultType="int">
-        select count(*) from tb_device  /*count (*)   如果 两者分开 则报错  */
+        select count(*) from tb_log  /*count (*)   如果 两者分开 则报错  */
     </select>
 </mapper>

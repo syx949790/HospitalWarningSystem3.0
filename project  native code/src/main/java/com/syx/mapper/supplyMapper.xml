@@ -14,4 +14,29 @@
     <select id="findAllCount" resultType="int">
         select  count(*) from tb_supply
     </select>
+
+
+
+    <delete id="deleteSupplyById" parameterType="int">
+        delete from tb_supply where id = #{id}
+    </delete>
+    <update id="updateSupplyById" parameterType="map">
+        update tb_supply
+        <set>
+            <if test="supply_name !=null" >
+                supply_name = #{supply_name},
+            </if>
+            <if test="business_license !=null">
+                business_license = #{business_license},
+            </if>
+            <if test="equip_license !=null">
+                equip_license = #{equip_license},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <insert id="insertSupply" parameterType="map">
+        insert into tb_equip(supply_name,business_license,equip_license) values (#{supply_name},#{business_license},#{equip_license})
+
+    </insert>
 </mapper>

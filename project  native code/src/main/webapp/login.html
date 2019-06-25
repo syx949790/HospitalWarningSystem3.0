@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/vcode.css">
+	<script type="text/javascript" src="js/vcode.js"></script>
+	<style>
+		@keyframes rotate {
+			0% {
+				transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+			}
+
+			100% {
+				transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(-360deg);
+			}
+		}
+
+		.stars {
+			transform: perspective(500px);
+			transform-style: preserve-3d;
+			position: absolute;
+			bottom: 0;
+			perspective-origin: 50% 100%;
+			left: 50%;
+			animation: rotate 90s infinite linear;
+		}
+
+		.star {
+			width: 2px;
+			height: 2px;
+			background: #F7F7B6;
+			position: absolute;
+			top: 0;
+			left: 0;
+			transform-origin: 0 0 -300px;
+			transform: translate3d(0, 0, -300px);
+			backface-visibility: hidden;
+		}
+	</style>
+
+</head>
+
+<body>
+	<script type="text/javascript">
+		$(function () {
+			createCode(4);
+			// alert("test");
+		});
+
+		function refreshVcode() {
+			createCode(4);
+		}
+
+		function login() {
+			var uname = $("#uname").val();
+			if (uname.length == 0) {
+				layer.tips("用户名不能为空!", "#uname", {tips: [2, '#FF0000'], time: 3000});
+				return;
+			}
+			var upwd = $("#upwd").val();
+			if (upwd.length == 0) {
+				layer.tips("密码不能为空!", "#upwd", {tips: [2, '#FF0000'], time: 3000});
+				return;
+			}
+			if (upwd.length < 6) {
+				layer.tips("密码长度应大于6位!", "#upwd", {tips: [2, '#FF0000'], time: 3000});
+				return;
+			}
+
+			var vcode = $("#vcode").val();
+			//  var vcodeimg=$("#checkCode").innerHTML;
+			if (vcode.length == 0) {
+				layer.tips("验证码不能为空!", "#vcode", { tips: [1, '#FF0000'], time: 3000 });
+				return;
+			}
+			if (vcode.toUpperCase() == code.toUpperCase()) {
+				$.ajax({
+					url: "user/login.do",
+					method: "post",
+					cache: false,
+					data: {
+						"uname":$("#uname").val(),
+						"upwd":$("#upwd").val()
+
+					},//表单序列化
+					success: function (result) {
+						if (JSON.parse(result) == "success") {
+
+
+							window.location.href = "admin2.html";
+
+						} else {
+							layer.msg("登录失败！", { icon: 2 });
+						}
+					},
+					error: function (e) {
+						layer.msg("请求服务器失败！", { icon: 2 });
+					}
+				});
+			} else {
+				layer.tips("验证码输入有误!", "#vcode", { tips: [1, '#FF0000'], time: 3000 });
+				return;
+			}
+		}
+
+
+	</script>
+	
+	
+	<div class="row" style="background-color: #00838F; height: 900px;">
+		
+		<div class="col-md-4"></div>
+		
+		<div class="col-md-4" style="margin-top: 50px; margin-bottom: 300px; padding: 0px;">
+			<div class="stars"></div>
+			<div class="" style="background-color: #00838F; padding: 0px; text-align: center; color: white;">
+				<h2>天津医科大学总医院</h2>
+				<h3>医疗设备检修预警系统</h3>
+			</div>
+			<div class=""
+				style="background-color: white; height: 500px; text-align: center;padding-top: 5px; font-weight: bold; size: 15px;">
+				<div style="font-weight: bold;">
+					<h3 class="text-secondary">欢迎您登陆</h3>
+				</div>
+				<div class="tab-content  row">
+					<div id="home" class="container tab-pane active col-sm-6 offset-sm-3" style="margin-left: 10%;"><br>
+						<div class="from-group" style="text-align: left; width: 150%; margin-top: 10px;">
+							<label class="text-muted" >用户名</label>
+							<input type="text" class="form-control" id="uname">
+						</div>
+						<div class="form-group" style="text-align: left;width: 150%; margin-top: 20px;">
+							<label class="text-muted"  class="text-left">密码</label>
+							<input type="password" class="form-control" id="upwd">
+						</div>
+						<div class="form-group" style="text-align: left">
+							<label for="vcode" class="text-left">验证码:</label>
+						</div>
+						<div class="form-inline" style="text-align: left">
+							<input type="text" class="form-control" id="vcode">
+							<div id="checkCode" onclick="refreshVcode()"></div>
+						</div>
+
+						<div class="form-inline" style="text-align: left; margin-top: 0px; margin-bottom: 0px;">
+
+						</div>
+						<div class="form-inline" style="margin-top: 40px; width: 170%; margin-bottom: 15px;">
+							<button class="btn btn-secondary"
+								style="width: 100%;height: 45px; background-color:#00838F; font-size: 20px; font-weight: bold;"
+								onclick="login()">登 陆</button>
+						</div>
+					</div>
+
+				</div>
+				<div style="padding-top: 20px;">
+					<hr />
+					<span class="text-secondary">沒有账号?</span>
+					<a href="register.html">点击注册</a>
+				</div>
+			</div>
+
+		</div>
+		<script>
+			$(document).ready(function () {
+				var stars = 800;
+				var $stars = $(".stars");
+				var r = 800;
+				for (var i = 0; i < stars; i++) {
+					var $star = $("<div/>").addClass("star");
+					$stars.append($star);
+				}
+				$(".star").each(function () {
+					var cur = $(this);
+					var s = 0.2 + (Math.random() * 1);
+					var curR = r + (Math.random() * 300);
+					cur.css({
+						transformOrigin: "0 0 " + curR + "px",
+						transform: " translate3d(0,0,-" + curR + "px) rotateY(" + (Math.random() * 360) + "deg) rotateX(" + (Math.random() * -50) + "deg) scale(" + s + "," + s + ")"
+	
+					})
+				})
+			})
+		</script>
+</body>
+
+</html>

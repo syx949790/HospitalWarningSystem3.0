@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="jquery/jquery3.4.1.js"></script>
+    <script>
+       function InsertUser() {
+           $.ajax({
+               url:'user/insertUser.do',
+               method:'post',
+               data:{
+                   "uname":$("#uname").val(),
+                   "runame":$("#runame").val(),
+                   "upwd":$("#password").val(),
+                   "address":$("#address").val(),
+
+               },
+               success:function (data) {
+                   if (JSON.parse(data) == "success") {
+                       alert("更新users成功");
+
+
+                   } else {
+                       alert("更新 失败");
+                   }
+               },
+               error: function () {
+                   alert("连接服务器失败");
+               }
+           });
+
+       }
+    </script>
+</head>
+<body>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" id="uname"  autocomplete="off" placeholder="请输入用户名" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+            <input type="text" id="password"  autocomplete="off" placeholder="请输入密码" class="layui-input">
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">真实姓名</label>
+        <div class="layui-input-block">
+            <input type="text" id="runame"   placeholder="请输入真实姓名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址</label>
+        <div class="layui-input-block">
+            <input type="text" id="address"   placeholder="请输入地址" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn"  lay-filter="demo1" onclick="InsertUser()">确认添加</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <br>
+</form>
+
+</body>
+</html>

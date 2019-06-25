@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="jquery/jquery3.4.1.js"></script>
+    <script>
+        function InsertDeviceInfo() {
+            $.ajax({
+                url:'user/insertDevice.do',
+                method:'post',
+                data:{
+                    "medicine_department":$("#medicine_department").val(),
+                    "t_device_name":$("#t_device_name").val(),
+                    "t_buy_date":$("#t_buy_date").val(),
+                    "t_check_circle":$("#t_check_circle").val(),
+
+                },
+                success:function (data) {
+                    if (JSON.parse(data) == "success") {
+                        alert("更新users成功");
+
+
+                    } else {
+                        alert("更新 失败");
+                    }
+                },
+                error: function () {
+                    alert("连接服务器失败");
+                }
+            });
+
+        }
+
+    </script>
+</head>
+<body>
+
+<form class="layui-form" method="post" >
+    <div class="layui-form-item">
+        <label class="layui-form-label">科室</label>
+        <div class="layui-input-block">
+            <input type="text" id="medicine_department"  autocomplete="off" placeholder="请输入设备科室" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备名称</label>
+        <div class="layui-input-block">
+            <input type="text" id="t_device_name"  autocomplete="off" placeholder="请输入设备名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">购买设备日期</label>
+        <div class="layui-input-block">
+            <input type="text" id="t_buy_date"  autocomplete="off" placeholder="请输入购买设备日期" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备维修周期</label>
+        <div class="layui-input-block">
+            <input type="text" id="t_check_circle"  autocomplete="off" placeholder="请输入维修周期" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn"  lay-filter="demo1" onclick="InsertDeviceInfo()" >确认添加</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

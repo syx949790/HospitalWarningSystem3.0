@@ -37,4 +37,56 @@ public class EquipController {
 
          return map;
      }
+
+
+    @RequestMapping("/updateDevice.do")
+    @ResponseBody
+    public String updateDevice(String t_check_date, String t_left_day,String warning_day,int id){
+
+        System.out.println("更新设备"+t_check_date+" "+t_left_day+" "+warning_day+" "+id);
+        Map map = new HashMap();
+        map.put("t_check_date",t_check_date);
+        map.put("t_left_day",t_left_day);
+        map.put("warning_day",warning_day);
+        map.put("id",id);
+        int flag = equipService.updateDeviceById(map);
+
+
+        if (flag !=0)
+            return "success";
+        else
+            return "fails";
+    }
+
+    @RequestMapping("/deleteDevice.do")
+    @ResponseBody
+    public String deleteDevice(int id){
+
+
+        System.out.println("deleteDevice  id="+ id);
+        int flag = equipService.deleteDeviceById(id);
+
+
+        if (flag !=0)
+            return "success";
+        else
+            return "fails";
+    }
+
+    @RequestMapping("/insertDevice.do")
+    @ResponseBody
+    public void insertDevice(String medicine_department,String t_device_name,String t_buy_date,String t_check_circle){
+
+
+        System.out.println("添加设备"+t_device_name+" "+t_buy_date+" "+t_check_circle+" "+medicine_department);
+        Map map = new HashMap();
+        map.put("t_device_name",t_device_name);
+        map.put("t_buy_date",t_buy_date);
+        map.put("t_check_circle",t_check_circle);
+        map.put("medicine_department",medicine_department);
+        int flag = equipService.insertDevice(map);
+
+
+
+    }
 }
