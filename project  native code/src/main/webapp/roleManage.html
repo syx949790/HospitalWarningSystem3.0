@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.com/libraries/chart.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="navbar navbar-default row" style="margin-bottom: 0px;margin-left: 0px; margin-top: 50px; background-color: white; border: white;">
+    <li class="col-md-8 text-muted" style="font-size: 20px;margin-top: 5px;">权限分配信息</li>
+    <li class="col-md-2"></li>
+    <li class="col-md-2 text-muted" style="font-size: 15px;margin-top: 5px;"></li>
+</div>
+<!-- 显示框 -->
+<div class="" style="margin-left:0px; margin-top:10px; padding-left: 20px; padding-top: 20px; background-color: #F0F0F0;height: 900px;">
+    <div class="row" style="height: 30%;">
+        <div class="col-md-5" style="background-color: white; width: 100%; height: 100%;box-shadow:0px 0px 3px 3px lightgray;margin-left: 5%;margin-top:1%;padding: 0px;">
+            <div style="background-color: #00838F;width: 100%;height: 20%;margin: 0px;padding-left: 13%;">
+                <p style="font-weight: bold;color:white; height: 100%; font-size: 37px;">院长</p>
+            </div>
+
+            <div id="userManage1" class="row" style="margin-top: 5%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">用户管理：</p>
+                <div class="radio-inline" style="margin-left: 4%;">
+                    <input type="radio" name="userManage1" value="1" />
+                    <label for="userManage1" style="font-weight: normal; color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage1" value="0" checked/>
+                    <label for="userManage1" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage1" value="0" checked/>
+                    <label for="userManage1" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="equipManage1" class="row"style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">设备管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="equipManage1" value="1" />
+                    <label for="equipManage1" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage1" value="0" checked/>
+                    <label for="equipManage1" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage1" value="0" checked/>
+                    <label  for="equipManage1" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="logManage1"  class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">日志管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="logManage1" value="1" />
+                    <label for="logManage1" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage1" value="0" checked/>
+                    <label  for="logManage1" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage1" value="0" checked/>
+                    <label for="logManage1" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="sponsorManage1" class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">供应商管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="sponsorManage1" value="1" />
+                    <label for="sponsorManage1" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage1" value="0" checked/>
+                    <label for="sponsorManage1" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage1" value="0" checked/>
+                    <label for="sponsorManage1" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-5" style="background-color: white; width: 100%; height: 100%;box-shadow:0px 0px 3px 3px lightgray;margin-left: 2%;margin-top: 1%;padding: 0px;">
+            <div style="background-color: #00838F;width: 100%;height: 20%;margin: 0px;padding-left: 13%;">
+                <p style="font-weight: bold;color:white; height: 100%; font-size: 37px;">维修组长</p>
+            </div>
+            <div id="userManage2" class="row" style="margin-top: 5%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">用户管理：</p>
+                <div class="radio-inline" style="margin-left: 4%;">
+                    <input type="radio" name="userManage2" value="1" />
+                    <label for="userManage2" style="font-weight: normal; color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage2" value="0" checked/>
+                    <label for="userManage2" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage2" value="0" checked/>
+                    <label for="userManage2" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="equipManage2" class="row"style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">设备管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="equipManage2" value="1" />
+                    <label for="equipManage2" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage2" value="0" checked/>
+                    <label for="equipManage2" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage2" value="0" checked/>
+                    <label  for="equipManage2" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="logManage2"  class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">日志管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="logManage2" value="1" />
+                    <label for="logManage2" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage2" value="0" checked/>
+                    <label  for="logManage2" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage2" value="0" checked/>
+                    <label for="logManage2" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="sponsorManage2" class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">供应商管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="sponsorManage2" value="1" />
+                    <label for="sponsorManage2" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage2" value="0" checked/>
+                    <label for="sponsorManage2" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage2" value="0" checked/>
+                    <label for="sponsorManage2" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="height: 30%;margin-top: 1%;">
+        <div class="col-md-5" style="background-color: white; width: 100%; height: 100%;box-shadow:0px 0px 3px 3px lightgray;margin-left: 5%;margin-top:1%;padding: 0px;">
+            <div style="background-color: #00838F;width: 100%;height: 20%;margin: 0px;padding-left: 13%;">
+                <p style="font-weight: bold;color:white; height: 100%; font-size: 37px;">维修工人</p>
+            </div>
+
+            <div id="userManage3" class="row" style="margin-top: 5%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">用户管理：</p>
+                <div class="radio-inline" style="margin-left: 4%;">
+                    <input type="radio" name="userManage3" value="1" />
+                    <label for="userManage3" style="font-weight: normal; color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage3" value="0" checked/>
+                    <label for="userManage3" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage3" value="0" checked/>
+                    <label for="userManage3" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="equipManage3" class="row"style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">设备管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="equipManage3" value="1" />
+                    <label for="equipManage3" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage3" value="0" checked/>
+                    <label for="equipManage3" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage3" value="0" checked/>
+                    <label  for="equipManage3" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="logManage3"  class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">日志管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="logManage3" value="1" />
+                    <label for="logManage3" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage3" value="0" checked/>
+                    <label  for="logManage3" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage3" value="0" checked/>
+                    <label for="logManage3" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="sponsorManage3" class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">供应商管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="sponsorManage3" value="1" />
+                    <label for="sponsorManage3" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage3" value="0" checked/>
+                    <label for="sponsorManage3" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage3" value="0" checked/>
+                    <label for="sponsorManage3" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-5" style="background-color: white; width: 100%; height: 100%;box-shadow:0px 0px 3px 3px lightgray;margin-left: 2%;margin-top: 1%;padding: 0px;">
+            <div style="background-color: #00838F;width: 100%;height: 20%;margin: 0px;padding-left: 13%;">
+                <p style="font-weight: bold;color:white; height: 100%; font-size: 37px;">医生</p>
+            </div>
+            <div id="userManage4" class="row" style="margin-top: 5%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">用户管理：</p>
+                <div class="radio-inline" style="margin-left: 4%;">
+                    <input type="radio" name="userManage4" value="1" />
+                    <label for="userManage4" style="font-weight: normal; color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage4" value="0" checked/>
+                    <label for="userManage4" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage4" value="0" checked/>
+                    <label for="userManage4" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="equipManage4" class="row"style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">设备管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="equipManage4" value="1" />
+                    <label for="equipManage4" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage4" value="0" checked/>
+                    <label for="equipManage4" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage4" value="0" checked/>
+                    <label  for="equipManage4" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="logManage4"  class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">日志管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="logManage4" value="1" />
+                    <label for="logManage4" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage4" value="0" checked/>
+                    <label  for="logManage4" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage4" value="0" checked/>
+                    <label for="logManage4" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="sponsorManage4" class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">供应商管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="sponsorManage4" value="1" />
+                    <label for="sponsorManage4" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage4" value="0" checked/>
+                    <label for="sponsorManage4" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage4" value="0" checked/>
+                    <label for="sponsorManage4" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="height: 30%;margin-top: 1%;">
+        <div class="col-md-5" style="background-color: white; width: 100%; height: 100%;box-shadow:0px 0px 3px 3px lightgray;margin-left: 5%;margin-top:1%;padding: 0px;">
+            <div style="background-color: #00838F;width: 100%;height: 20%;margin: 0px;padding-left: 13%;">
+                <p style="font-weight: bold;color:white; height: 100%; font-size: 37px;">护士</p>
+            </div>
+
+            <div id="userManage5" class="row" style="margin-top: 5%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">用户管理：</p>
+                <div class="radio-inline" style="margin-left: 4%;">
+                    <input type="radio" name="userManage5" value="1" />
+                    <label for="userManage5" style="font-weight: normal; color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage5" value="0" checked/>
+                    <label for="userManage5" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage5" value="0" checked/>
+                    <label for="userManage5" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="equipManage5" class="row"style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">设备管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="equipManage5" value="1" />
+                    <label for="equipManage5" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage5" value="0" checked/>
+                    <label for="equipManage5" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage5" value="0" checked/>
+                    <label  for="equipManage5" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="logManage5"  class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">日志管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="logManage5" value="1" />
+                    <label for="logManage5" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage5" value="0" checked/>
+                    <label  for="logManage5" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage5" value="0" checked/>
+                    <label for="logManage5" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="sponsorManage5" class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">供应商管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="sponsorManage5" value="1" />
+                    <label for="sponsorManage5" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage5" value="0" checked/>
+                    <label for="sponsorManage5" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage5" value="0" checked/>
+                    <label for="sponsorManage5" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-5" style="background-color: white; width: 100%; height: 100%;box-shadow:0px 0px 3px 3px lightgray;margin-left: 2%;margin-top: 1%;padding: 0px;">
+            <div style="background-color: #00838F;width: 100%;height: 20%;margin: 0px;padding-left: 13%;">
+                <p style="font-weight: bold;color:white; height: 100%; font-size: 37px;">设备管理员</p>
+            </div>
+            <div id="userManage6" class="row" style="margin-top: 5%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">用户管理：</p>
+                <div class="radio-inline" style="margin-left: 4%;">
+                    <input type="radio" name="userManage6" value="1" />
+                    <label for="userManage6" style="font-weight: normal; color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage6" value="0" checked/>
+                    <label for="userManage6" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="userManage6" value="0" checked/>
+                    <label for="userManage6" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="equipManage6" class="row"style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">设备管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="equipManage6" value="1" />
+                    <label for="equipManage6" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage6" value="0" checked/>
+                    <label for="equipManage6" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="equipManage6" value="0" checked/>
+                    <label  for="equipManage6" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="logManage6"  class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">日志管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="logManage6" value="1" />
+                    <label for="logManage6" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage6" value="0" checked/>
+                    <label  for="logManage6" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" name="logManage6" value="0" checked/>
+                    <label for="logManage6" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+            <div id="sponsorManage6" class="row" style="margin-top: 3%; margin-left: 5%;">
+                <p style="font-weight: bold;color: #00838F;">供应商管理：</p>
+                <div class="radio-inline"  style="margin-left: 4%;">
+                    <input type="radio" name="sponsorManage6" value="1" />
+                    <label for="sponsorManage6" style="font-weight: normal;color: #00838F;">可新增与编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage6" value="0" checked/>
+                    <label for="sponsorManage6" style="font-weight: normal;color: #00838F;">可编辑</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="sponsorManage6" value="0" checked/>
+                    <label for="sponsorManage6" style="font-weight: normal;color: #00838F;">仅可查询</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script>
+</script>
+</body>
+</html>
